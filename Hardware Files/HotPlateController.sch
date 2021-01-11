@@ -183,8 +183,11 @@ U 1 1 5FFC34F0
 P 1450 6250
 F 0 "J3" H 1368 6567 50  0000 C CNN
 F 1 "Screw_Terminal_01x03" H 1368 6476 50  0000 C CNN
-F 2 "TerminalBlock:TerminalBlock_bornier-3_P5.08mm" H 1450 6250 50  0001 C CNN
+F 2 "HotPlateController:1729131" H 1450 6250 50  0001 C CNN
 F 3 "~" H 1450 6250 50  0001 C CNN
+F 4 "Pheonix Contact" H 1450 6250 50  0001 C CNN "MF 1"
+F 5 "1729131" H 1450 6250 50  0001 C CNN "MF 1 MPN"
+F 6 "C91154" H 1450 6250 50  0001 C CNN "MF 1 Ordering Code"
 	1    1450 6250
 	-1   0    0    -1  
 $EndComp
@@ -194,8 +197,11 @@ U 1 1 5FFC34F6
 P 4150 6250
 F 0 "J4" H 4068 5925 50  0000 C CNN
 F 1 "Screw_Terminal_01x03" H 4068 6016 50  0000 C CNN
-F 2 "TerminalBlock:TerminalBlock_bornier-3_P5.08mm" H 4150 6250 50  0001 C CNN
+F 2 "HotPlateController:1729131" H 4150 6250 50  0001 C CNN
 F 3 "~" H 4150 6250 50  0001 C CNN
+F 4 "Pheonix Contact" H 4150 6250 50  0001 C CNN "MF 1"
+F 5 "1729131" H 4150 6250 50  0001 C CNN "MF 1 MPN"
+F 6 "C91154" H 4150 6250 50  0001 C CNN "MF 1 Ordering Code"
 	1    4150 6250
 	1    0    0    1   
 $EndComp
@@ -239,8 +245,6 @@ Wire Wire Line
 Wire Wire Line
 	1700 6350 3950 6350
 Connection ~ 1700 6350
-Wire Wire Line
-	2500 6150 2200 6150
 Wire Wire Line
 	3200 6850 3250 6850
 Wire Wire Line
@@ -467,20 +471,18 @@ $EndComp
 $Comp
 L power:+3.3V #PWR?
 U 1 1 5FFD3079
-P 2875 825
+P 3100 700
 AR Path="/5F45F2B5/5FFD3079" Ref="#PWR?"  Part="1" 
 AR Path="/5FFD3079" Ref="#PWR012"  Part="1" 
 AR Path="/5FFB786E/5FFD3079" Ref="#PWR?"  Part="1" 
 AR Path="/5FFB9C6F/5FFD3079" Ref="#PWR?"  Part="1" 
-F 0 "#PWR012" H 2875 675 50  0001 C CNN
-F 1 "+3.3V" H 2890 998 50  0000 C CNN
-F 2 "" H 2875 825 50  0001 C CNN
-F 3 "" H 2875 825 50  0001 C CNN
-	1    2875 825 
+F 0 "#PWR012" H 3100 550 50  0001 C CNN
+F 1 "+3.3V" H 3115 873 50  0000 C CNN
+F 2 "" H 3100 700 50  0001 C CNN
+F 3 "" H 3100 700 50  0001 C CNN
+	1    3100 700 
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	2875 825  2875 925 
 Text Label 4100 1050 2    50   ~ 0
 IO0
 Wire Wire Line
@@ -584,23 +586,6 @@ F 1 "GND" H 6430 1802 50  0000 C CNN
 F 2 "" H 6425 1975 50  0001 C CNN
 F 3 "" H 6425 1975 50  0001 C CNN
 	1    6425 1975
-	1    0    0    -1  
-$EndComp
-$Comp
-L RF_Module:ESP32-WROOM-32 U?
-U 1 1 5FFD30D5
-P 3100 2250
-AR Path="/5F45F2B5/5FFD30D5" Ref="U?"  Part="1" 
-AR Path="/5FFD30D5" Ref="U3"  Part="1" 
-AR Path="/5FFB786E/5FFD30D5" Ref="U?"  Part="1" 
-AR Path="/5FFB9C6F/5FFD30D5" Ref="U?"  Part="1" 
-F 0 "U3" H 3300 3750 50  0000 C CNN
-F 1 "ESP32-WROOM-32" H 3600 3650 50  0000 C CNN
-F 2 "RF_Module:ESP32-WROOM-32" H 3100 750 50  0001 C CNN
-F 3 "https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32_datasheet_en.pdf" H 2800 2300 50  0001 C CNN
-F 4 "Espressif" H 3100 2250 50  0001 C CNN "MF 1"
-F 5 "ESP32-WROOM-32D" H 3100 2250 50  0001 C CNN "MF 1 MPN"
-	1    3100 2250
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -976,10 +961,6 @@ Wire Wire Line
 Connection ~ 3450 5350
 Wire Wire Line
 	3450 5350 3450 5400
-Wire Wire Line
-	2500 5750 2500 6150
-Wire Wire Line
-	2900 5750 2900 6150
 $Comp
 L Device:R R?
 U 1 1 60016A6F
@@ -1219,4 +1200,85 @@ Wire Wire Line
 Wire Wire Line
 	-1500 2300 -1200 2300
 Connection ~ -1500 2300
+Text GLabel 3850 1950 2    50   Input ~ 0
+U0TX_Active
+Wire Wire Line
+	3700 1950 3850 1950
+Wire Wire Line
+	3100 700  3100 850 
+$Comp
+L RF_Module:ESP32-WROOM-32 U?
+U 1 1 5FFD30D5
+P 3100 2250
+AR Path="/5F45F2B5/5FFD30D5" Ref="U?"  Part="1" 
+AR Path="/5FFD30D5" Ref="U3"  Part="1" 
+AR Path="/5FFB786E/5FFD30D5" Ref="U?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD30D5" Ref="U?"  Part="1" 
+F 0 "U3" H 3300 3750 50  0000 C CNN
+F 1 "ESP32-WROOM-32" H 3600 3650 50  0000 C CNN
+F 2 "RF_Module:ESP32-WROOM-32" H 3100 750 50  0001 C CNN
+F 3 "https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32_datasheet_en.pdf" H 2800 2300 50  0001 C CNN
+F 4 "Espressif" H 3100 2250 50  0001 C CNN "MF 1"
+F 5 "ESP32-WROOM-32D" H 3100 2250 50  0001 C CNN "MF 1 MPN"
+	1    3100 2250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2550 6150 2550 5900
+Wire Wire Line
+	2550 5900 2900 5900
+Wire Wire Line
+	2900 5900 2900 5750
+Wire Wire Line
+	2200 6150 2550 6150
+Wire Wire Line
+	2900 6150 2900 5950
+Wire Wire Line
+	2900 5950 2500 5950
+Wire Wire Line
+	2500 5950 2500 5750
+$Comp
+L Connector_Generic:Conn_01x01 M1
+U 1 1 6005F7F2
+P 12700 3500
+F 0 "M1" H 12780 3542 50  0000 L CNN
+F 1 "Conn_01x01" H 12780 3451 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3_DIN965" H 12700 3500 50  0001 C CNN
+F 3 "~" H 12700 3500 50  0001 C CNN
+	1    12700 3500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x01 M2
+U 1 1 600608BD
+P 12700 3750
+F 0 "M2" H 12780 3792 50  0000 L CNN
+F 1 "Conn_01x01" H 12780 3701 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3_DIN965" H 12700 3750 50  0001 C CNN
+F 3 "~" H 12700 3750 50  0001 C CNN
+	1    12700 3750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x01 M3
+U 1 1 60060ADD
+P 12700 3950
+F 0 "M3" H 12780 3992 50  0000 L CNN
+F 1 "Conn_01x01" H 12780 3901 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3_DIN965" H 12700 3950 50  0001 C CNN
+F 3 "~" H 12700 3950 50  0001 C CNN
+	1    12700 3950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x01 M4
+U 1 1 60060EB2
+P 12700 4150
+F 0 "M4" H 12780 4192 50  0000 L CNN
+F 1 "Conn_01x01" H 12780 4101 50  0000 L CNN
+F 2 "MountingHole:MountingHole_3.2mm_M3_DIN965" H 12700 4150 50  0001 C CNN
+F 3 "~" H 12700 4150 50  0001 C CNN
+	1    12700 4150
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
