@@ -1,4 +1,858 @@
-EESchema Schematic File Version 2
-EELAYER 25 0
+EESchema Schematic File Version 4
+EELAYER 30 0
 EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Sensor_Temperature:MAX31855KASA U3
+U 1 1 5F92CAE2
+P 9650 5550
+F 0 "U3" H 10050 6050 50  0000 C CNN
+F 1 "MAX31855KASA" H 10300 5950 50  0000 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 10650 5200 50  0001 C CIN
+F 3 "http://datasheets.maximintegrated.com/en/ds/MAX31855.pdf" H 9650 5550 50  0001 C CNN
+	1    9650 5550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x02 J1
+U 1 1 5F92E2A4
+P 8750 5550
+F 0 "J1" H 8668 5225 50  0000 C CNN
+F 1 "Thermocouple" H 8668 5316 50  0000 C CNN
+F 2 "TerminalBlock_TE-Connectivity:TerminalBlock_TE_282834-2_1x02_P2.54mm_Horizontal" H 8750 5550 50  0001 C CNN
+F 3 "~" H 8750 5550 50  0001 C CNN
+	1    8750 5550
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:LED D1
+U 1 1 5FFA34C2
+P 8400 1200
+F 0 "D1" H 8393 1417 50  0000 C CNN
+F 1 "LED" H 8393 1326 50  0000 C CNN
+F 2 "Diode_SMD:D_1206_3216Metric_Pad1.42x1.75mm_HandSolder" H 8400 1200 50  0001 C CNN
+F 3 "~" H 8400 1200 50  0001 C CNN
+	1    8400 1200
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 5FFA3C43
+P 8800 1500
+F 0 "R1" H 8870 1546 50  0000 L CNN
+F 1 "R" H 8870 1455 50  0000 L CNN
+F 2 "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" V 8730 1500 50  0001 C CNN
+F 3 "~" H 8800 1500 50  0001 C CNN
+	1    8800 1500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0101
+U 1 1 5FFA4BC6
+P 8800 1850
+F 0 "#PWR0101" H 8800 1600 50  0001 C CNN
+F 1 "GND" H 8805 1677 50  0000 C CNN
+F 2 "" H 8800 1850 50  0001 C CNN
+F 3 "" H 8800 1850 50  0001 C CNN
+	1    8800 1850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8550 1200 8800 1200
+Wire Wire Line
+	8800 1200 8800 1350
+Wire Wire Line
+	8800 1650 8800 1850
+Wire Wire Line
+	8250 1200 7800 1200
+Text Label 7800 1200 0    50   ~ 0
+Status_LED
+$Comp
+L Device:LED D2
+U 1 1 5FFAA004
+P 10100 1200
+F 0 "D2" H 10093 1417 50  0000 C CNN
+F 1 "LED" H 10093 1326 50  0000 C CNN
+F 2 "Diode_SMD:D_1206_3216Metric_Pad1.42x1.75mm_HandSolder" H 10100 1200 50  0001 C CNN
+F 3 "~" H 10100 1200 50  0001 C CNN
+	1    10100 1200
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 5FFAA00A
+P 10500 1500
+F 0 "R2" H 10570 1546 50  0000 L CNN
+F 1 "R" H 10570 1455 50  0000 L CNN
+F 2 "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" V 10430 1500 50  0001 C CNN
+F 3 "~" H 10500 1500 50  0001 C CNN
+	1    10500 1500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0102
+U 1 1 5FFAA010
+P 10500 1850
+F 0 "#PWR0102" H 10500 1600 50  0001 C CNN
+F 1 "GND" H 10505 1677 50  0000 C CNN
+F 2 "" H 10500 1850 50  0001 C CNN
+F 3 "" H 10500 1850 50  0001 C CNN
+	1    10500 1850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10250 1200 10500 1200
+Wire Wire Line
+	10500 1200 10500 1350
+Wire Wire Line
+	10500 1650 10500 1850
+Wire Wire Line
+	9950 1200 9500 1200
+Text Label 9500 1200 0    50   ~ 0
+Hot_LED
+$Comp
+L Connector_Generic:Conn_01x02 J4
+U 1 1 5FFAA848
+P 6450 5350
+F 0 "J4" H 6368 5567 50  0000 C CNN
+F 1 "Conn_01x02" H 6368 5476 50  0000 C CNN
+F 2 "" H 6450 5350 50  0001 C CNN
+F 3 "~" H 6450 5350 50  0001 C CNN
+	1    6450 5350
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0103
+U 1 1 5FFAC57B
+P 6950 5900
+F 0 "#PWR0103" H 6950 5650 50  0001 C CNN
+F 1 "GND" H 6955 5727 50  0000 C CNN
+F 2 "" H 6950 5900 50  0001 C CNN
+F 3 "" H 6950 5900 50  0001 C CNN
+	1    6950 5900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6950 5900 6950 5450
+Wire Wire Line
+	6950 5450 6650 5450
+Wire Wire Line
+	7550 4900 6950 4900
+Wire Wire Line
+	6950 4900 6950 5350
+Wire Wire Line
+	6950 5350 6650 5350
+Text Label 7550 4900 2    50   ~ 0
+SSRelay_Trigger
+Wire Wire Line
+	8950 5550 9050 5550
+Wire Wire Line
+	9050 5550 9050 5650
+Wire Wire Line
+	9050 5650 9250 5650
+Wire Wire Line
+	8950 5450 9250 5450
+$Comp
+L power:+3V3 #PWR0104
+U 1 1 5FFB7CD6
+P 9650 5050
+F 0 "#PWR0104" H 9650 4900 50  0001 C CNN
+F 1 "+3V3" H 9665 5223 50  0000 C CNN
+F 2 "" H 9650 5050 50  0001 C CNN
+F 3 "" H 9650 5050 50  0001 C CNN
+	1    9650 5050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9650 5050 9650 5150
+$Comp
+L power:GND #PWR0105
+U 1 1 5FFBB35B
+P 9650 6100
+F 0 "#PWR0105" H 9650 5850 50  0001 C CNN
+F 1 "GND" H 9655 5927 50  0000 C CNN
+F 2 "" H 9650 6100 50  0001 C CNN
+F 3 "" H 9650 6100 50  0001 C CNN
+	1    9650 6100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9650 5950 9650 6100
+$Comp
+L Sensor_Current:ACS712xLCTR-20A U2
+U 1 1 5FFC34DE
+P 2700 5350
+F 0 "U2" V 2746 4906 50  0000 R CNN
+F 1 "ACS712xLCTR-20A" V 2655 4906 50  0000 R CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 2800 5000 50  0001 L CIN
+F 3 "http://www.allegromicro.com/~/media/Files/Datasheets/ACS712-Datasheet.ashx?la=en" H 2700 5350 50  0001 C CNN
+	1    2700 5350
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Converter_ACDC:HLK-PM01 PS1
+U 1 1 5FFC34E4
+P 2800 6700
+F 0 "PS1" H 2800 7025 50  0000 C CNN
+F 1 "HLK-PM01" H 2800 6934 50  0000 C CNN
+F 2 "Converter_ACDC:Converter_ACDC_HiLink_HLK-PMxx" H 2800 6400 50  0001 C CNN
+F 3 "http://www.hlktech.net/product_detail.php?ProId=54" H 3200 6350 50  0001 C CNN
+	1    2800 6700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Fuse F1
+U 1 1 5FFC34EA
+P 3350 5900
+F 0 "F1" V 3153 5900 50  0000 C CNN
+F 1 "Fuse" V 3244 5900 50  0000 C CNN
+F 2 "" V 3280 5900 50  0001 C CNN
+F 3 "~" H 3350 5900 50  0001 C CNN
+	1    3350 5900
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:Screw_Terminal_01x03 J2
+U 1 1 5FFC34F0
+P 1450 6000
+F 0 "J2" H 1368 6317 50  0000 C CNN
+F 1 "Screw_Terminal_01x03" H 1368 6226 50  0000 C CNN
+F 2 "TerminalBlock:TerminalBlock_bornier-3_P5.08mm" H 1450 6000 50  0001 C CNN
+F 3 "~" H 1450 6000 50  0001 C CNN
+	1    1450 6000
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector:Screw_Terminal_01x03 J3
+U 1 1 5FFC34F6
+P 4150 6000
+F 0 "J3" H 4068 5675 50  0000 C CNN
+F 1 "Screw_Terminal_01x03" H 4068 5766 50  0000 C CNN
+F 2 "TerminalBlock:TerminalBlock_bornier-3_P5.08mm" H 4150 6000 50  0001 C CNN
+F 3 "~" H 4150 6000 50  0001 C CNN
+	1    4150 6000
+	1    0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR0106
+U 1 1 5FFC350B
+P 3250 6900
+F 0 "#PWR0106" H 3250 6650 50  0001 C CNN
+F 1 "GND" H 3255 6727 50  0000 C CNN
+F 2 "" H 3250 6900 50  0001 C CNN
+F 3 "" H 3250 6900 50  0001 C CNN
+	1    3250 6900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:Earth #PWR0107
+U 1 1 5FFC3511
+P 1700 6250
+F 0 "#PWR0107" H 1700 6000 50  0001 C CNN
+F 1 "Earth" H 1700 6100 50  0001 C CNN
+F 2 "" H 1700 6250 50  0001 C CNN
+F 3 "~" H 1700 6250 50  0001 C CNN
+	1    1700 6250
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR0108
+U 1 1 5FFC351D
+P 3250 6500
+F 0 "#PWR0108" H 3250 6350 50  0001 C CNN
+F 1 "+5V" H 3265 6673 50  0000 C CNN
+F 2 "" H 3250 6500 50  0001 C CNN
+F 3 "" H 3250 6500 50  0001 C CNN
+	1    3250 6500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1650 6100 1700 6100
+Wire Wire Line
+	1700 6100 1700 6250
+Wire Wire Line
+	1700 6100 3950 6100
+Connection ~ 1700 6100
+Wire Wire Line
+	2500 5750 2500 5900
+Wire Wire Line
+	2500 5900 2200 5900
+Wire Wire Line
+	2900 5750 2900 5900
+Wire Wire Line
+	2900 5900 3200 5900
+Wire Wire Line
+	3500 5900 3950 5900
+Wire Wire Line
+	3200 6600 3250 6600
+Wire Wire Line
+	3250 6600 3250 6500
+Wire Wire Line
+	3200 6800 3250 6800
+Wire Wire Line
+	3250 6800 3250 6900
+Wire Wire Line
+	3950 6000 2100 6000
+Wire Wire Line
+	2400 6800 2100 6800
+Wire Wire Line
+	2100 6800 2100 6000
+Connection ~ 2100 6000
+Wire Wire Line
+	2100 6000 1650 6000
+Wire Wire Line
+	2200 5900 2200 6600
+Wire Wire Line
+	2200 6600 2400 6600
+Connection ~ 2200 5900
+Wire Wire Line
+	2200 5900 1650 5900
+Text Label 10700 5350 2    50   ~ 0
+ESP32_SPI_SCK
+Wire Wire Line
+	10050 5350 10700 5350
+$Comp
+L Device:R R?
+U 1 1 5FFD3016
+P 5025 3075
+AR Path="/5F45F2B5/5FFD3016" Ref="R?"  Part="1" 
+AR Path="/5FFD3016" Ref="R4"  Part="1" 
+AR Path="/5FFB786E/5FFD3016" Ref="R?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD3016" Ref="R?"  Part="1" 
+F 0 "R4" H 5095 3121 50  0000 L CNN
+F 1 "10k 5% 0.25W" H 5095 3030 50  0000 L CNN
+F 2 "Resistor_SMD:R_1206_3216Metric_Pad1.42x1.75mm_HandSolder" V 4955 3075 50  0001 C CNN
+F 3 "~" H 5025 3075 50  0001 C CNN
+F 4 "Yageo" H 5025 3075 50  0001 C CNN "MF"
+F 5 "RC1206JR-0710KL" H 5025 3075 50  0001 C CNN "MPN"
+	1    5025 3075
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5025 3225 5025 3425
+Text Label 5075 3425 0    50   ~ 0
+EN
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5FFD301E
+P 5025 2775
+AR Path="/5F45F2B5/5FFD301E" Ref="#PWR?"  Part="1" 
+AR Path="/5FFD301E" Ref="#PWR0109"  Part="1" 
+AR Path="/5FFB786E/5FFD301E" Ref="#PWR?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD301E" Ref="#PWR?"  Part="1" 
+F 0 "#PWR0109" H 5025 2625 50  0001 C CNN
+F 1 "+3.3V" H 5040 2948 50  0000 C CNN
+F 2 "" H 5025 2775 50  0001 C CNN
+F 3 "" H 5025 2775 50  0001 C CNN
+	1    5025 2775
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5025 2775 5025 2925
+$Comp
+L Device:C C?
+U 1 1 5FFD3027
+P 1525 1900
+AR Path="/5F45F2B5/5FFD3027" Ref="C?"  Part="1" 
+AR Path="/5FFD3027" Ref="C2"  Part="1" 
+AR Path="/5FFB786E/5FFD3027" Ref="C?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD3027" Ref="C?"  Part="1" 
+F 0 "C2" H 1640 1946 50  0000 L CNN
+F 1 "1uF 50V" H 1640 1855 50  0000 L CNN
+F 2 "Capacitor_SMD:C_1206_3216Metric_Pad1.42x1.75mm_HandSolder" H 1563 1750 50  0001 C CNN
+F 3 "~" H 1525 1900 50  0001 C CNN
+F 4 "Samsung Electro-Mechanics" H 1525 1900 50  0001 C CNN "MF"
+F 5 "CL31B105KBHNFNE" H 1525 1900 50  0001 C CNN "MPN"
+	1    1525 1900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	925  2050 925  2100
+Wire Wire Line
+	925  2100 1525 2100
+Wire Wire Line
+	1525 2100 1525 2050
+Wire Wire Line
+	925  1750 925  1700
+Wire Wire Line
+	925  1700 1525 1700
+Wire Wire Line
+	1525 1700 1525 1750
+Wire Wire Line
+	925  1700 925  1600
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5FFD3034
+P 925 1600
+AR Path="/5F45F2B5/5FFD3034" Ref="#PWR?"  Part="1" 
+AR Path="/5FFD3034" Ref="#PWR0110"  Part="1" 
+AR Path="/5FFB786E/5FFD3034" Ref="#PWR?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD3034" Ref="#PWR?"  Part="1" 
+F 0 "#PWR0110" H 925 1450 50  0001 C CNN
+F 1 "+3.3V" H 940 1773 50  0000 C CNN
+F 2 "" H 925 1600 50  0001 C CNN
+F 3 "" H 925 1600 50  0001 C CNN
+	1    925  1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5FFD303A
+P 1525 2200
+AR Path="/5F45F2B5/5FFD303A" Ref="#PWR?"  Part="1" 
+AR Path="/5FFD303A" Ref="#PWR0111"  Part="1" 
+AR Path="/5FFB786E/5FFD303A" Ref="#PWR?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD303A" Ref="#PWR?"  Part="1" 
+F 0 "#PWR0111" H 1525 1950 50  0001 C CNN
+F 1 "GND" H 1530 2027 50  0000 C CNN
+F 2 "" H 1525 2200 50  0001 C CNN
+F 3 "" H 1525 2200 50  0001 C CNN
+	1    1525 2200
+	1    0    0    -1  
+$EndComp
+Connection ~ 1525 2100
+Wire Wire Line
+	1525 2200 1525 2100
+Connection ~ 925  1700
+$Comp
+L power:GND #PWR?
+U 1 1 5FFD3043
+P 2875 3825
+AR Path="/5F45F2B5/5FFD3043" Ref="#PWR?"  Part="1" 
+AR Path="/5FFD3043" Ref="#PWR0112"  Part="1" 
+AR Path="/5FFB786E/5FFD3043" Ref="#PWR?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD3043" Ref="#PWR?"  Part="1" 
+F 0 "#PWR0112" H 2875 3575 50  0001 C CNN
+F 1 "GND" H 2880 3652 50  0000 C CNN
+F 2 "" H 2875 3825 50  0001 C CNN
+F 3 "" H 2875 3825 50  0001 C CNN
+	1    2875 3825
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2875 3825 2875 3725
+Wire Wire Line
+	2275 1125 2075 1125
+Text Label 2075 1125 0    50   ~ 0
+EN
+Wire Wire Line
+	3475 1225 3825 1225
+Wire Wire Line
+	3475 1425 3825 1425
+Text Label 3825 1225 2    50   ~ 0
+USB_RX
+Text Label 3825 1425 2    50   ~ 0
+USB_TX
+$Comp
+L Switch:SW_Push SW?
+U 1 1 5FFD3052
+P 6025 3425
+AR Path="/5F45F2B5/5FFD3052" Ref="SW?"  Part="1" 
+AR Path="/5FFD3052" Ref="SW2"  Part="1" 
+AR Path="/5FFB786E/5FFD3052" Ref="SW?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD3052" Ref="SW?"  Part="1" 
+F 0 "SW2" H 6025 3710 50  0000 C CNN
+F 1 "SPST (RED)" H 6025 3619 50  0000 C CNN
+F 2 ".DesignArchive:PTS636_SM25F_SMTR_LFS" H 6025 3625 50  0001 C CNN
+F 3 "~" H 6025 3625 50  0001 C CNN
+F 4 "TE Connectivity ALCOSWITCH Switches" H 6025 3425 50  0001 C CNN "MF"
+F 5 "1825027-6" H 6025 3425 50  0001 C CNN "MPN"
+	1    6025 3425
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6225 3425 6475 3425
+Wire Wire Line
+	6475 3425 6475 3625
+$Comp
+L power:GND #PWR?
+U 1 1 5FFD305A
+P 6475 3725
+AR Path="/5F45F2B5/5FFD305A" Ref="#PWR?"  Part="1" 
+AR Path="/5FFD305A" Ref="#PWR0113"  Part="1" 
+AR Path="/5FFB786E/5FFD305A" Ref="#PWR?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD305A" Ref="#PWR?"  Part="1" 
+F 0 "#PWR0113" H 6475 3475 50  0001 C CNN
+F 1 "GND" H 6480 3552 50  0000 C CNN
+F 2 "" H 6475 3725 50  0001 C CNN
+F 3 "" H 6475 3725 50  0001 C CNN
+	1    6475 3725
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 5FFD3062
+P 6025 3625
+AR Path="/5F45F2B5/5FFD3062" Ref="C?"  Part="1" 
+AR Path="/5FFD3062" Ref="C4"  Part="1" 
+AR Path="/5FFB786E/5FFD3062" Ref="C?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD3062" Ref="C?"  Part="1" 
+F 0 "C4" V 6175 3625 50  0000 C CNN
+F 1 "1nF 50V" V 6275 3625 50  0000 C CNN
+F 2 "Capacitor_SMD:C_1206_3216Metric_Pad1.42x1.75mm_HandSolder" H 6063 3475 50  0001 C CNN
+F 3 "~" H 6025 3625 50  0001 C CNN
+F 4 "Walsin Technology Corporation" V 6025 3625 50  0001 C CNN "MF"
+F 5 "1206B102K500CT" V 6025 3625 50  0001 C CNN "MPN"
+	1    6025 3625
+	0    1    1    0   
+$EndComp
+Connection ~ 5775 3425
+Wire Wire Line
+	5775 3425 5825 3425
+Wire Wire Line
+	5775 3625 5875 3625
+Wire Wire Line
+	5775 3425 5775 3625
+Wire Wire Line
+	6175 3625 6475 3625
+Connection ~ 6475 3625
+Wire Wire Line
+	6475 3625 6475 3725
+Text Notes 4950 2450 0    50   ~ 0
+Boot Mode Selection
+Text Notes 5825 2975 0    50   ~ 0
+User Reset
+$Comp
+L Device:C C?
+U 1 1 5FFD3073
+P 925 1900
+AR Path="/5F45F2B5/5FFD3073" Ref="C?"  Part="1" 
+AR Path="/5FFD3073" Ref="C1"  Part="1" 
+AR Path="/5FFB786E/5FFD3073" Ref="C?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD3073" Ref="C?"  Part="1" 
+F 0 "C1" H 1075 1850 50  0000 L CNN
+F 1 "10uF 25V 10%" H 1075 1925 50  0000 L CNN
+F 2 "Capacitor_SMD:C_1206_3216Metric_Pad1.42x1.75mm_HandSolder" H 963 1750 50  0001 C CNN
+F 3 "~" H 925 1900 50  0001 C CNN
+F 4 "Samsung Electro-Mechanics" H 925 1900 50  0001 C CNN "MF"
+F 5 "CL31A106MAHNNNE" H 925 1900 50  0001 C CNN "MPN"
+	1    925  1900
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5FFD3079
+P 2875 825
+AR Path="/5F45F2B5/5FFD3079" Ref="#PWR?"  Part="1" 
+AR Path="/5FFD3079" Ref="#PWR0114"  Part="1" 
+AR Path="/5FFB786E/5FFD3079" Ref="#PWR?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD3079" Ref="#PWR?"  Part="1" 
+F 0 "#PWR0114" H 2875 675 50  0001 C CNN
+F 1 "+3.3V" H 2890 998 50  0000 C CNN
+F 2 "" H 2875 825 50  0001 C CNN
+F 3 "" H 2875 825 50  0001 C CNN
+	1    2875 825 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2875 825  2875 925 
+Text Label 3825 1125 2    50   ~ 0
+IO0
+Wire Wire Line
+	3825 1825 3475 1825
+Wire Wire Line
+	5025 3425 5775 3425
+$Comp
+L Switch:SW_Push SW?
+U 1 1 5FFD3085
+P 5825 1525
+AR Path="/5F45F2B5/5FFD3085" Ref="SW?"  Part="1" 
+AR Path="/5FFD3085" Ref="SW1"  Part="1" 
+AR Path="/5FFB786E/5FFD3085" Ref="SW?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD3085" Ref="SW?"  Part="1" 
+F 0 "SW1" H 5825 1810 50  0000 C CNN
+F 1 "SPST (BLUE)" H 5825 1719 50  0000 C CNN
+F 2 ".DesignArchive:PTS636_SM25F_SMTR_LFS" H 5825 1725 50  0001 C CNN
+F 3 "~" H 5825 1725 50  0001 C CNN
+F 4 "TE Connectivity ALCOSWITCH Switches" H 5825 1525 50  0001 C CNN "MF"
+F 5 "1825027-8" H 5825 1525 50  0001 C CNN "MPN"
+	1    5825 1525
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 5FFD308D
+P 5825 1775
+AR Path="/5F45F2B5/5FFD308D" Ref="C?"  Part="1" 
+AR Path="/5FFD308D" Ref="C3"  Part="1" 
+AR Path="/5FFB786E/5FFD308D" Ref="C?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD308D" Ref="C?"  Part="1" 
+F 0 "C3" V 5975 1775 50  0000 C CNN
+F 1 "1nF 50V" V 6075 1775 50  0000 C CNN
+F 2 "Capacitor_SMD:C_1206_3216Metric_Pad1.42x1.75mm_HandSolder" H 5863 1625 50  0001 C CNN
+F 3 "~" H 5825 1775 50  0001 C CNN
+F 4 "Walsin Technology Corporation" V 5825 1775 50  0001 C CNN "MF"
+F 5 "1206B102K500CT" V 5825 1775 50  0001 C CNN "MPN"
+	1    5825 1775
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5FFD3095
+P 5225 1225
+AR Path="/5F45F2B5/5FFD3095" Ref="R?"  Part="1" 
+AR Path="/5FFD3095" Ref="R3"  Part="1" 
+AR Path="/5FFB786E/5FFD3095" Ref="R?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD3095" Ref="R?"  Part="1" 
+F 0 "R3" H 5050 1300 50  0000 L CNN
+F 1 "10k 5% 0.25W" H 4600 1225 50  0000 L CNN
+F 2 "Resistor_SMD:R_1206_3216Metric_Pad1.42x1.75mm_HandSolder" V 5155 1225 50  0001 C CNN
+F 3 "~" H 5225 1225 50  0001 C CNN
+F 4 "Yageo" H 5225 1225 50  0001 C CNN "MF"
+F 5 "RC1206JR-0710KL" H 5225 1225 50  0001 C CNN "MPN"
+	1    5225 1225
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5225 1375 5225 1525
+Wire Wire Line
+	5225 1525 5625 1525
+Wire Wire Line
+	5225 1525 5225 1775
+Wire Wire Line
+	5225 1775 5675 1775
+Connection ~ 5225 1525
+Wire Wire Line
+	6025 1525 6425 1525
+Wire Wire Line
+	6425 1525 6425 1775
+Wire Wire Line
+	5975 1775 6425 1775
+Connection ~ 6425 1775
+Wire Wire Line
+	6425 1775 6425 1975
+Wire Wire Line
+	5225 925  5225 1075
+$Comp
+L power:+3.3V #PWR?
+U 1 1 5FFD30A6
+P 5225 925
+AR Path="/5F45F2B5/5FFD30A6" Ref="#PWR?"  Part="1" 
+AR Path="/5FFD30A6" Ref="#PWR0115"  Part="1" 
+AR Path="/5FFB786E/5FFD30A6" Ref="#PWR?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD30A6" Ref="#PWR?"  Part="1" 
+F 0 "#PWR0115" H 5225 775 50  0001 C CNN
+F 1 "+3.3V" H 5240 1098 50  0000 C CNN
+F 2 "" H 5225 925 50  0001 C CNN
+F 3 "" H 5225 925 50  0001 C CNN
+	1    5225 925 
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5FFD30AC
+P 6425 1975
+AR Path="/5F45F2B5/5FFD30AC" Ref="#PWR?"  Part="1" 
+AR Path="/5FFD30AC" Ref="#PWR0116"  Part="1" 
+AR Path="/5FFB786E/5FFD30AC" Ref="#PWR?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD30AC" Ref="#PWR?"  Part="1" 
+F 0 "#PWR0116" H 6425 1725 50  0001 C CNN
+F 1 "GND" H 6430 1802 50  0000 C CNN
+F 2 "" H 6425 1975 50  0001 C CNN
+F 3 "" H 6425 1975 50  0001 C CNN
+	1    6425 1975
+	1    0    0    -1  
+$EndComp
+$Comp
+L RF_Module:ESP32-WROOM-32 U?
+U 1 1 5FFD30D5
+P 2875 2325
+AR Path="/5F45F2B5/5FFD30D5" Ref="U?"  Part="1" 
+AR Path="/5FFD30D5" Ref="U1"  Part="1" 
+AR Path="/5FFB786E/5FFD30D5" Ref="U?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD30D5" Ref="U?"  Part="1" 
+F 0 "U1" H 3075 3825 50  0000 C CNN
+F 1 "ESP32-WROOM-32" H 3375 3725 50  0000 C CNN
+F 2 "RF_Module:ESP32-WROOM-32" H 2875 825 50  0001 C CNN
+F 3 "https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32_datasheet_en.pdf" H 2575 2375 50  0001 C CNN
+F 4 "Espressif" H 2875 2325 50  0001 C CNN "MF"
+F 5 "ESP32-WROOM-32D" H 2875 2325 50  0001 C CNN "MPN"
+	1    2875 2325
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3475 2425 3775 2425
+$Comp
+L Connector_Generic:Conn_02x04_Odd_Even J?
+U 1 1 5FFD30DC
+P 1275 3125
+AR Path="/5FFB9C6F/5FFD30DC" Ref="J?"  Part="1" 
+AR Path="/5FFD30DC" Ref="J5"  Part="1" 
+F 0 "J5" H 1325 3442 50  0000 C CNN
+F 1 "0.100\" 2x4 Header" H 1325 3351 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x04_P2.54mm_Vertical" H 1275 3125 50  0001 C CNN
+F 3 "~" H 1275 3125 50  0001 C CNN
+	1    1275 3125
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1575 3025 1925 3025
+Wire Wire Line
+	1575 3125 1925 3125
+Wire Wire Line
+	1575 3225 1925 3225
+Wire Wire Line
+	1575 3325 1925 3325
+Text Label 1925 3025 2    50   ~ 0
+EN
+Text Label 1925 3125 2    50   ~ 0
+IO0
+Text Label 1925 3325 2    50   ~ 0
+USB_RX
+Text Label 1925 3225 2    50   ~ 0
+USB_TX
+Wire Wire Line
+	1075 3025 975  3025
+Wire Wire Line
+	975  3025 975  3125
+Wire Wire Line
+	975  3225 1075 3225
+Wire Wire Line
+	1075 3125 975  3125
+Connection ~ 975  3125
+Wire Wire Line
+	975  3125 975  3225
+Wire Wire Line
+	1075 3325 1075 3575
+Text Label 1425 3575 2    50   ~ 0
+VREG_IN
+Wire Wire Line
+	1075 3575 1425 3575
+$Comp
+L power:GND #PWR?
+U 1 1 5FFD30F3
+P 875 3325
+AR Path="/5F45F2B5/5FFD30F3" Ref="#PWR?"  Part="1" 
+AR Path="/5FFD30F3" Ref="#PWR0117"  Part="1" 
+AR Path="/5FFB786E/5FFD30F3" Ref="#PWR?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD30F3" Ref="#PWR?"  Part="1" 
+F 0 "#PWR0117" H 875 3075 50  0001 C CNN
+F 1 "GND" H 880 3152 50  0000 C CNN
+F 2 "" H 875 3325 50  0001 C CNN
+F 3 "" H 875 3325 50  0001 C CNN
+	1    875  3325
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	875  3325 975  3325
+Wire Wire Line
+	975  3325 975  3225
+Connection ~ 975  3225
+Wire Notes Line
+	4925 2450 5775 2450
+Text Notes 825  1300 0    50   ~ 0
+U3 Bypass Capacitors
+Wire Notes Line
+	800  1300 1700 1300
+Text GLabel 5075 1525 0    50   Input ~ 0
+PairSwitch_CTLI
+Wire Wire Line
+	5075 1525 5225 1525
+Text Notes 5525 575  0    50   ~ 0
+User Pair Switch
+Wire Notes Line
+	5475 575  6225 575 
+Text Notes 925  2675 0    50   ~ 0
+Programming Header
+Wire Notes Line
+	1775 2675 875  2675
+Wire Wire Line
+	3475 2525 3775 2525
+Text Notes 875  4025 0    50   ~ 0
+EN
+Text Notes 825  4225 0    50   ~ 0
+IO 0
+Text Notes 825  3775 0    50   ~ 0
+To enter programming mode
+Wire Notes Line style solid
+	1025 3925 1125 3925
+Wire Notes Line style solid
+	1125 3925 1125 4025
+Wire Notes Line style solid
+	1125 4025 1325 4025
+Wire Notes Line style solid
+	1325 4025 1325 3925
+Wire Notes Line style solid
+	1175 4125 1175 4225
+Wire Notes Line style solid
+	1175 4225 1525 4225
+Wire Notes Line style solid
+	1525 4225 1525 4125
+Wire Notes Line style solid
+	1525 4125 1775 4125
+Wire Notes Line style solid
+	1025 4125 1175 4125
+Wire Notes Line style solid
+	1325 3925 1775 3925
+Wire Notes Line
+	5800 2975 6275 2975
+Wire Wire Line
+	3475 3125 3725 3125
+Wire Wire Line
+	3825 1125 3475 1125
+$Comp
+L Device:R R?
+U 1 1 5FFD3122
+P 9050 3450
+AR Path="/5F45F2B5/5FFD3122" Ref="R?"  Part="1" 
+AR Path="/5FFD3122" Ref="R5"  Part="1" 
+AR Path="/5FFB786E/5FFD3122" Ref="R?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD3122" Ref="R?"  Part="1" 
+F 0 "R5" H 9120 3496 50  0000 L CNN
+F 1 "10k 5% 0.25W" H 9120 3405 50  0000 L CNN
+F 2 "Resistor_SMD:R_1206_3216Metric_Pad1.42x1.75mm_HandSolder" V 8980 3450 50  0001 C CNN
+F 3 "~" H 9050 3450 50  0001 C CNN
+F 4 "Yageo" H 9050 3450 50  0001 C CNN "MF"
+F 5 "RC1206JR-0710KL" H 9050 3450 50  0001 C CNN "MPN"
+	1    9050 3450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3850 1325 3475 1325
+Wire Wire Line
+	3825 2025 3475 2025
+Text GLabel 8925 3200 0    50   Input ~ 0
+U0TX_Active
+Wire Wire Line
+	8925 3200 9050 3200
+Wire Wire Line
+	9050 3200 9050 3300
+$Comp
+L power:GND #PWR?
+U 1 1 5FFD312E
+P 9050 3725
+AR Path="/5F45F2B5/5FFD312E" Ref="#PWR?"  Part="1" 
+AR Path="/5FFD312E" Ref="#PWR0118"  Part="1" 
+AR Path="/5FFB786E/5FFD312E" Ref="#PWR?"  Part="1" 
+AR Path="/5FFB9C6F/5FFD312E" Ref="#PWR?"  Part="1" 
+F 0 "#PWR0118" H 9050 3475 50  0001 C CNN
+F 1 "GND" H 9055 3552 50  0000 C CNN
+F 2 "" H 9050 3725 50  0001 C CNN
+F 3 "" H 9050 3725 50  0001 C CNN
+	1    9050 3725
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9050 3600 9050 3725
+Text Notes 9375 3125 0    50   ~ 0
+MTDO Pin has internal pull up\nU0TX Active : 0\nU0TX Disabled: 1
+Text Label 5325 1525 0    50   ~ 0
+IO0
+Text GLabel 3775 2525 2    50   Input ~ 0
+PairLED_CTLO
+Text GLabel 3775 2425 2    50   Input ~ 0
+PairSwitch_CTLI
+Text GLabel 3725 3125 2    50   Input ~ 0
+Solenoid_1_CTLO
 $EndSCHEMATC

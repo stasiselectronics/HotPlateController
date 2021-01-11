@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name HotPlateController)(type KiCad)(uri ${KIPRJMOD}/Libraries/Footprints/HotPlateController.pretty)(options "")(descr ""))
+)
