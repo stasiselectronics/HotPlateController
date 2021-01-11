@@ -41,7 +41,7 @@ U 1 1 5FFA34C2
 P 8400 1200
 F 0 "D1" H 8393 1417 50  0000 C CNN
 F 1 "LED" H 8393 1326 50  0000 C CNN
-F 2 "Capacitor_SMD:C_1206_3216Metric" H 8400 1200 50  0001 C CNN
+F 2 "Diode_SMD:D_1206_3216Metric_Pad1.42x1.75mm_HandSolder" H 8400 1200 50  0001 C CNN
 F 3 "~" H 8400 1200 50  0001 C CNN
 	1    8400 1200
 	-1   0    0    1   
@@ -82,7 +82,7 @@ U 1 1 5FFAA004
 P 10100 1200
 F 0 "D2" H 10093 1417 50  0000 C CNN
 F 1 "LED" H 10093 1326 50  0000 C CNN
-F 2 "Capacitor_SMD:C_1206_3216Metric" H 10100 1200 50  0001 C CNN
+F 2 "Diode_SMD:D_1206_3216Metric_Pad1.42x1.75mm_HandSolder" H 10100 1200 50  0001 C CNN
 F 3 "~" H 10100 1200 50  0001 C CNN
 	1    10100 1200
 	-1   0    0    1   
@@ -128,16 +128,16 @@ Wire Wire Line
 $Comp
 L power:+3V3 #PWR025
 U 1 1 5FFB7CD6
-P 9450 4450
-F 0 "#PWR025" H 9450 4300 50  0001 C CNN
-F 1 "+3V3" H 9465 4623 50  0000 C CNN
-F 2 "" H 9450 4450 50  0001 C CNN
-F 3 "" H 9450 4450 50  0001 C CNN
-	1    9450 4450
+P 9450 4200
+F 0 "#PWR025" H 9450 4050 50  0001 C CNN
+F 1 "+3V3" H 9465 4373 50  0000 C CNN
+F 2 "" H 9450 4200 50  0001 C CNN
+F 3 "" H 9450 4200 50  0001 C CNN
+	1    9450 4200
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	9450 4450 9450 4550
+	9450 4200 9450 4350
 $Comp
 L power:GND #PWR026
 U 1 1 5FFBB35B
@@ -172,7 +172,7 @@ U 1 1 5FFC34E4
 P 2800 6950
 F 0 "PS1" H 2800 7275 50  0000 C CNN
 F 1 "HLK-PM01" H 2800 7184 50  0000 C CNN
-F 2 "Converter_ACDC:Converter_ACDC_HiLink_HLK-PMxx" H 2800 6650 50  0001 C CNN
+F 2 "HotPlateController:Converter_ACDC_HiLink_HLK-PMxx" H 2800 6650 50  0001 C CNN
 F 3 "http://www.hlktech.net/product_detail.php?ProId=54" H 3200 6600 50  0001 C CNN
 	1    2800 6950
 	1    0    0    -1  
@@ -314,68 +314,68 @@ Wire Wire Line
 $Comp
 L Device:C C?
 U 1 1 5FFD3027
-P 1525 1900
+P -1125 4800
 AR Path="/5F45F2B5/5FFD3027" Ref="C?"  Part="1" 
 AR Path="/5FFD3027" Ref="C4"  Part="1" 
 AR Path="/5FFB786E/5FFD3027" Ref="C?"  Part="1" 
 AR Path="/5FFB9C6F/5FFD3027" Ref="C?"  Part="1" 
-F 0 "C4" H 1640 1946 50  0000 L CNN
-F 1 "1uF 50V" H 1640 1855 50  0000 L CNN
-F 2 "Capacitor_SMD:C_1206_3216Metric" H 1563 1750 50  0001 C CNN
-F 3 "~" H 1525 1900 50  0001 C CNN
-F 4 "Samsung Electro-Mechanics" H 1525 1900 50  0001 C CNN "MF 1"
-F 5 "CL31B105KBHNFNE" H 1525 1900 50  0001 C CNN "MF 1 MPN"
-	1    1525 1900
+F 0 "C4" H -1010 4846 50  0000 L CNN
+F 1 "1uF 50V" H -1010 4755 50  0000 L CNN
+F 2 "Capacitor_SMD:C_1206_3216Metric" H -1087 4650 50  0001 C CNN
+F 3 "~" H -1125 4800 50  0001 C CNN
+F 4 "Samsung Electro-Mechanics" H -1125 4800 50  0001 C CNN "MF 1"
+F 5 "CL31B105KBHNFNE" H -1125 4800 50  0001 C CNN "MF 1 MPN"
+	1    -1125 4800
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	925  2050 925  2100
+	-1725 4950 -1725 5000
 Wire Wire Line
-	925  2100 1525 2100
+	-1725 5000 -1125 5000
 Wire Wire Line
-	1525 2100 1525 2050
+	-1125 5000 -1125 4950
 Wire Wire Line
-	925  1750 925  1700
+	-1725 4650 -1725 4600
 Wire Wire Line
-	925  1700 1525 1700
+	-1725 4600 -1125 4600
 Wire Wire Line
-	1525 1700 1525 1750
+	-1125 4600 -1125 4650
 Wire Wire Line
-	925  1700 925  1600
+	-1725 4600 -1725 4500
 $Comp
 L power:+3.3V #PWR?
 U 1 1 5FFD3034
-P 925 1600
+P -1725 4500
 AR Path="/5F45F2B5/5FFD3034" Ref="#PWR?"  Part="1" 
 AR Path="/5FFD3034" Ref="#PWR07"  Part="1" 
 AR Path="/5FFB786E/5FFD3034" Ref="#PWR?"  Part="1" 
 AR Path="/5FFB9C6F/5FFD3034" Ref="#PWR?"  Part="1" 
-F 0 "#PWR07" H 925 1450 50  0001 C CNN
-F 1 "+3.3V" H 940 1773 50  0000 C CNN
-F 2 "" H 925 1600 50  0001 C CNN
-F 3 "" H 925 1600 50  0001 C CNN
-	1    925  1600
+F 0 "#PWR07" H -1725 4350 50  0001 C CNN
+F 1 "+3.3V" H -1710 4673 50  0000 C CNN
+F 2 "" H -1725 4500 50  0001 C CNN
+F 3 "" H -1725 4500 50  0001 C CNN
+	1    -1725 4500
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR?
 U 1 1 5FFD303A
-P 1525 2200
+P -1125 5100
 AR Path="/5F45F2B5/5FFD303A" Ref="#PWR?"  Part="1" 
 AR Path="/5FFD303A" Ref="#PWR08"  Part="1" 
 AR Path="/5FFB786E/5FFD303A" Ref="#PWR?"  Part="1" 
 AR Path="/5FFB9C6F/5FFD303A" Ref="#PWR?"  Part="1" 
-F 0 "#PWR08" H 1525 1950 50  0001 C CNN
-F 1 "GND" H 1530 2027 50  0000 C CNN
-F 2 "" H 1525 2200 50  0001 C CNN
-F 3 "" H 1525 2200 50  0001 C CNN
-	1    1525 2200
+F 0 "#PWR08" H -1125 4850 50  0001 C CNN
+F 1 "GND" H -1120 4927 50  0000 C CNN
+F 2 "" H -1125 5100 50  0001 C CNN
+F 3 "" H -1125 5100 50  0001 C CNN
+	1    -1125 5100
 	1    0    0    -1  
 $EndComp
-Connection ~ 1525 2100
+Connection ~ -1125 5000
 Wire Wire Line
-	1525 2200 1525 2100
-Connection ~ 925  1700
+	-1125 5100 -1125 5000
+Connection ~ -1725 4600
 Text Label 2250 1050 0    50   ~ 0
 EN
 Text Label 4100 1150 2    50   ~ 0
@@ -392,7 +392,7 @@ AR Path="/5FFB786E/5FFD3052" Ref="SW?"  Part="1"
 AR Path="/5FFB9C6F/5FFD3052" Ref="SW?"  Part="1" 
 F 0 "SW2" H 6025 3710 50  0000 C CNN
 F 1 "SPST (RED)" H 6025 3619 50  0000 C CNN
-F 2 ".DesignArchive:PTS636_SM25F_SMTR_LFS" H 6025 3625 50  0001 C CNN
+F 2 "HotPlateController:PTS636_SM25F_SMTR_LFS" H 6025 3625 50  0001 C CNN
 F 3 "~" H 6025 3625 50  0001 C CNN
 F 4 "TE Connectivity ALCOSWITCH Switches" H 6025 3425 50  0001 C CNN "MF 1"
 F 5 "1825027-6" H 6025 3425 50  0001 C CNN "MF 1 MPN"
@@ -454,18 +454,18 @@ User Reset
 $Comp
 L Device:C C?
 U 1 1 5FFD3073
-P 925 1900
+P -1725 4800
 AR Path="/5F45F2B5/5FFD3073" Ref="C?"  Part="1" 
 AR Path="/5FFD3073" Ref="C3"  Part="1" 
 AR Path="/5FFB786E/5FFD3073" Ref="C?"  Part="1" 
 AR Path="/5FFB9C6F/5FFD3073" Ref="C?"  Part="1" 
-F 0 "C3" H 1075 1850 50  0000 L CNN
-F 1 "10uF 25V 10%" H 1075 1925 50  0000 L CNN
-F 2 "Capacitor_SMD:C_1206_3216Metric" H 963 1750 50  0001 C CNN
-F 3 "~" H 925 1900 50  0001 C CNN
-F 4 "Samsung Electro-Mechanics" H 925 1900 50  0001 C CNN "MF 1"
-F 5 "CL31A106MAHNNNE" H 925 1900 50  0001 C CNN "MF 1 MPN"
-	1    925  1900
+F 0 "C3" H -1575 4750 50  0000 L CNN
+F 1 "10uF 25V 10%" H -1575 4825 50  0000 L CNN
+F 2 "Capacitor_SMD:C_1206_3216Metric" H -1687 4650 50  0001 C CNN
+F 3 "~" H -1725 4800 50  0001 C CNN
+F 4 "Samsung Electro-Mechanics" H -1725 4800 50  0001 C CNN "MF 1"
+F 5 "CL31A106MAHNNNE" H -1725 4800 50  0001 C CNN "MF 1 MPN"
+	1    -1725 4800
 	-1   0    0    1   
 $EndComp
 $Comp
@@ -483,8 +483,6 @@ F 3 "" H 3100 700 50  0001 C CNN
 	1    3100 700 
 	1    0    0    -1  
 $EndComp
-Text Label 4100 1050 2    50   ~ 0
-IO0
 Wire Wire Line
 	5025 3425 5775 3425
 $Comp
@@ -497,7 +495,7 @@ AR Path="/5FFB786E/5FFD3085" Ref="SW?"  Part="1"
 AR Path="/5FFB9C6F/5FFD3085" Ref="SW?"  Part="1" 
 F 0 "SW1" H 5825 1810 50  0000 C CNN
 F 1 "SPST (BLUE)" H 5825 1719 50  0000 C CNN
-F 2 ".DesignArchive:PTS636_SM25F_SMTR_LFS" H 5825 1725 50  0001 C CNN
+F 2 "HotPlateController:PTS636_SM25F_SMTR_LFS" H 5825 1725 50  0001 C CNN
 F 3 "~" H 5825 1725 50  0001 C CNN
 F 4 "TE Connectivity ALCOSWITCH Switches" H 5825 1525 50  0001 C CNN "MF 1"
 F 5 "1825027-8" H 5825 1525 50  0001 C CNN "MF 1 MPN"
@@ -591,75 +589,75 @@ $EndComp
 $Comp
 L Connector_Generic:Conn_02x04_Odd_Even J?
 U 1 1 5FFD30DC
-P 1275 3125
+P -3425 4425
 AR Path="/5FFB9C6F/5FFD30DC" Ref="J?"  Part="1" 
 AR Path="/5FFD30DC" Ref="J2"  Part="1" 
-F 0 "J2" H 1325 3442 50  0000 C CNN
-F 1 "0.100\" 2x4 Header" H 1325 3351 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_2x04_P2.54mm_Vertical" H 1275 3125 50  0001 C CNN
-F 3 "~" H 1275 3125 50  0001 C CNN
-	1    1275 3125
+F 0 "J2" H -3375 4742 50  0000 C CNN
+F 1 "0.100\" 2x4 Header" H -3375 4651 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x04_P2.54mm_Vertical" H -3425 4425 50  0001 C CNN
+F 3 "~" H -3425 4425 50  0001 C CNN
+	1    -3425 4425
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1575 3025 1925 3025
+	-3125 4325 -2775 4325
 Wire Wire Line
-	1575 3125 1925 3125
+	-3125 4425 -2775 4425
 Wire Wire Line
-	1575 3225 1925 3225
+	-3125 4525 -2775 4525
 Wire Wire Line
-	1575 3325 1925 3325
-Text Label 1925 3025 2    50   ~ 0
+	-3125 4625 -2775 4625
+Text Label -2775 4325 2    50   ~ 0
 EN
-Text Label 1925 3125 2    50   ~ 0
+Text Label -2775 4425 2    50   ~ 0
 IO0
-Text Label 1925 3325 2    50   ~ 0
+Text Label -2775 4625 2    50   ~ 0
 USB_RX
-Text Label 1925 3225 2    50   ~ 0
+Text Label -2775 4525 2    50   ~ 0
 USB_TX
 Wire Wire Line
-	1075 3025 975  3025
+	-3625 4325 -3725 4325
 Wire Wire Line
-	975  3025 975  3125
+	-3725 4325 -3725 4425
 Wire Wire Line
-	975  3225 1075 3225
+	-3725 4525 -3625 4525
 Wire Wire Line
-	1075 3125 975  3125
-Connection ~ 975  3125
+	-3625 4425 -3725 4425
+Connection ~ -3725 4425
 Wire Wire Line
-	975  3125 975  3225
+	-3725 4425 -3725 4525
 Wire Wire Line
-	1075 3325 1075 3575
-Text Label 1425 3575 2    50   ~ 0
+	-3625 4625 -3625 4875
+Text Label -3275 4875 2    50   ~ 0
 VREG_IN
 Wire Wire Line
-	1075 3575 1425 3575
+	-3625 4875 -3275 4875
 $Comp
 L power:GND #PWR?
 U 1 1 5FFD30F3
-P 875 3325
+P -3825 4625
 AR Path="/5F45F2B5/5FFD30F3" Ref="#PWR?"  Part="1" 
 AR Path="/5FFD30F3" Ref="#PWR06"  Part="1" 
 AR Path="/5FFB786E/5FFD30F3" Ref="#PWR?"  Part="1" 
 AR Path="/5FFB9C6F/5FFD30F3" Ref="#PWR?"  Part="1" 
-F 0 "#PWR06" H 875 3075 50  0001 C CNN
-F 1 "GND" H 880 3152 50  0000 C CNN
-F 2 "" H 875 3325 50  0001 C CNN
-F 3 "" H 875 3325 50  0001 C CNN
-	1    875  3325
+F 0 "#PWR06" H -3825 4375 50  0001 C CNN
+F 1 "GND" H -3820 4452 50  0000 C CNN
+F 2 "" H -3825 4625 50  0001 C CNN
+F 3 "" H -3825 4625 50  0001 C CNN
+	1    -3825 4625
 	-1   0    0    -1  
 $EndComp
 Wire Wire Line
-	875  3325 975  3325
+	-3825 4625 -3725 4625
 Wire Wire Line
-	975  3325 975  3225
-Connection ~ 975  3225
+	-3725 4625 -3725 4525
+Connection ~ -3725 4525
 Wire Notes Line
 	4925 2450 5775 2450
-Text Notes 825  1300 0    50   ~ 0
+Text Notes -1825 4200 0    50   ~ 0
 U3 Bypass Capacitors
 Wire Notes Line
-	800  1300 1700 1300
+	-1850 4200 -950 4200
 Text GLabel 5075 1525 0    50   Input ~ 0
 UserSwitch
 Wire Wire Line
@@ -668,36 +666,36 @@ Text Notes 5525 575  0    50   ~ 0
 User Pair Switch
 Wire Notes Line
 	5475 575  6225 575 
-Text Notes 925  2675 0    50   ~ 0
+Text Notes -3775 3975 0    50   ~ 0
 Programming Header
 Wire Notes Line
-	1775 2675 875  2675
-Text Notes 875  4025 0    50   ~ 0
+	-2925 3975 -3825 3975
+Text Notes -3825 5325 0    50   ~ 0
 EN
-Text Notes 825  4225 0    50   ~ 0
+Text Notes -3875 5525 0    50   ~ 0
 IO 0
-Text Notes 825  3775 0    50   ~ 0
+Text Notes -3875 5075 0    50   ~ 0
 To enter programming mode
 Wire Notes Line style solid
-	1025 3925 1125 3925
+	-3675 5225 -3575 5225
 Wire Notes Line style solid
-	1125 3925 1125 4025
+	-3575 5225 -3575 5325
 Wire Notes Line style solid
-	1125 4025 1325 4025
+	-3575 5325 -3375 5325
 Wire Notes Line style solid
-	1325 4025 1325 3925
+	-3375 5325 -3375 5225
 Wire Notes Line style solid
-	1175 4125 1175 4225
+	-3525 5425 -3525 5525
 Wire Notes Line style solid
-	1175 4225 1525 4225
+	-3525 5525 -3175 5525
 Wire Notes Line style solid
-	1525 4225 1525 4125
+	-3175 5525 -3175 5425
 Wire Notes Line style solid
-	1525 4125 1775 4125
+	-3175 5425 -2925 5425
 Wire Notes Line style solid
-	1025 4125 1175 4125
+	-3675 5425 -3525 5425
 Wire Notes Line style solid
-	1325 3925 1775 3925
+	-3375 5225 -2925 5225
 Wire Notes Line
 	5800 2975 6275 2975
 $Comp
@@ -742,8 +740,6 @@ Wire Wire Line
 	9050 3600 9050 3725
 Text Notes 9375 3125 0    50   ~ 0
 MTDO Pin has internal pull up\nU0TX Active : 0\nU0TX Disabled: 1
-Text Label 5325 1525 0    50   ~ 0
-IO0
 Text Label 10550 4850 2    50   ~ 0
 ESP32_SPI_MISO
 Wire Wire Line
@@ -756,7 +752,7 @@ Text GLabel 8050 1200 0    50   Input ~ 0
 StatusLED
 Text GLabel 9750 1200 0    50   Input ~ 0
 HotLED
-Text GLabel 12450 1050 0    50   Input ~ 0
+Text GLabel 4000 2300 2    50   Input ~ 0
 HotLED
 $Comp
 L power:+5V #PWR011
@@ -1031,11 +1027,9 @@ Wire Wire Line
 	4800 4250 5000 4250
 Wire Wire Line
 	5000 4250 5000 4500
-Text GLabel 12450 1200 0    50   Input ~ 0
-V_Current_adj
-Text GLabel 12450 1350 0    50   Input ~ 0
+Text GLabel 4000 2150 2    50   Input ~ 0
 StatusLED
-Text GLabel 12450 1500 0    50   Input ~ 0
+Text GLabel 4100 1050 2    50   Input ~ 0
 UserSwitch
 Text GLabel 4000 3350 2    50   Input ~ 0
 V_Current_adj
@@ -1281,4 +1275,59 @@ F 3 "~" H 12700 4150 50  0001 C CNN
 	1    12700 4150
 	1    0    0    -1  
 $EndComp
+Text Label 1800 1350 0    50   ~ 0
+ESP32_SPI_SCK
+Wire Wire Line
+	2500 1350 1800 1350
+Wire Wire Line
+	2500 2750 1800 2750
+Wire Wire Line
+	3700 2650 4900 2650
+Text Label 4900 2650 2    50   ~ 0
+ESP32_SPI_TEMPSENSOR_1_CS
+Text Label 1800 2750 0    50   ~ 0
+ESP32_SPI_MISO
+$Comp
+L Device:C C?
+U 1 1 6015A3B7
+P 9200 4350
+AR Path="/5F45F2B5/6015A3B7" Ref="C?"  Part="1" 
+AR Path="/6015A3B7" Ref="C9"  Part="1" 
+AR Path="/5FFB786E/6015A3B7" Ref="C?"  Part="1" 
+AR Path="/5FFB9C6F/6015A3B7" Ref="C?"  Part="1" 
+F 0 "C9" V 9350 4300 50  0000 L CNN
+F 1 "1uF 50V" V 9050 4050 50  0000 L CNN
+F 2 "Capacitor_SMD:C_1206_3216Metric" H 9238 4200 50  0001 C CNN
+F 3 "~" H 9200 4350 50  0001 C CNN
+F 4 "Samsung Electro-Mechanics" H 9200 4350 50  0001 C CNN "MF 1"
+F 5 "CL31B105KBHNFNE" H 9200 4350 50  0001 C CNN "MF 1 MPN"
+	1    9200 4350
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	9350 4350 9450 4350
+Connection ~ 9450 4350
+Wire Wire Line
+	9450 4350 9450 4550
+Wire Wire Line
+	9050 4350 8800 4350
+Wire Wire Line
+	8800 4350 8800 4450
+$Comp
+L power:GND #PWR?
+U 1 1 601763A2
+P 8800 4450
+AR Path="/5F45F2B5/601763A2" Ref="#PWR?"  Part="1" 
+AR Path="/601763A2" Ref="#PWR0101"  Part="1" 
+AR Path="/5FFB786E/601763A2" Ref="#PWR?"  Part="1" 
+AR Path="/5FFB9C6F/601763A2" Ref="#PWR?"  Part="1" 
+F 0 "#PWR0101" H 8800 4200 50  0001 C CNN
+F 1 "GND" H 8805 4277 50  0000 C CNN
+F 2 "" H 8800 4450 50  0001 C CNN
+F 3 "" H 8800 4450 50  0001 C CNN
+	1    8800 4450
+	1    0    0    -1  
+$EndComp
+Text Label 4100 1050 2    50   ~ 0
+IO0
 $EndSCHEMATC
