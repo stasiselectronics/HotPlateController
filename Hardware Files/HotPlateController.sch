@@ -27,13 +27,13 @@ $EndComp
 $Comp
 L Connector_Generic:Conn_01x02 J5
 U 1 1 5F92E2A4
-P 8550 4950
-F 0 "J5" H 8468 4625 50  0000 C CNN
-F 1 "Thermocouple" H 8468 4716 50  0000 C CNN
-F 2 "TerminalBlock_TE-Connectivity:TerminalBlock_TE_282834-2_1x02_P2.54mm_Horizontal" H 8550 4950 50  0001 C CNN
-F 3 "~" H 8550 4950 50  0001 C CNN
-	1    8550 4950
-	-1   0    0    1   
+P 8550 4850
+F 0 "J5" H 8468 4525 50  0000 C CNN
+F 1 "Thermocouple" H 8468 4616 50  0000 C CNN
+F 2 "HotPlateController:1935161" H 8550 4850 50  0001 C CNN
+F 3 "~" H 8550 4850 50  0001 C CNN
+	1    8550 4850
+	-1   0    0    -1  
 $EndComp
 $Comp
 L Device:LED D1
@@ -123,7 +123,7 @@ U 1 1 5FFAA848
 P 6450 5350
 F 0 "J4" H 6368 5567 50  0000 C CNN
 F 1 "Conn_01x02" H 6368 5476 50  0000 C CNN
-F 2 "" H 6450 5350 50  0001 C CNN
+F 2 "HotPlateController:1935161" H 6450 5350 50  0001 C CNN
 F 3 "~" H 6450 5350 50  0001 C CNN
 	1    6450 5350
 	-1   0    0    -1  
@@ -1121,4 +1121,136 @@ Wire Wire Line
 	3700 1350 4100 1350
 Wire Wire Line
 	2900 6150 3950 6150
+$Comp
+L Device:Q_NMOS_GDS Q?
+U 1 1 60097432
+P -4100 4750
+AR Path="/60097432" Ref="Q?"  Part="1" 
+AR Path="/5F45E76E/60097432" Ref="Q?"  Part="1" 
+AR Path="/5FFB786E/60097432" Ref="Q?"  Part="1" 
+AR Path="/6006C464/60097432" Ref="Q?"  Part="1" 
+F 0 "Q?" H -3896 4841 50  0000 L CNN
+F 1 "NMOS 60V 46A" H -3896 4750 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:TO-252-3_TabPin2" H -3900 4850 50  0001 C CNN
+F 3 "~" H -4100 4750 50  0001 C CNN
+F 4 "ON Semiconductor" H -4100 4750 50  0001 C CNN "MF"
+F 5 "NTD5865NLT4G" H -3896 4659 50  0000 L CNN "MPN"
+	1    -4100 4750
+	1    0    0    1   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60097442
+P -4400 4450
+AR Path="/60097442" Ref="R?"  Part="1" 
+AR Path="/5F45E76E/60097442" Ref="R?"  Part="1" 
+AR Path="/5FFB786E/60097442" Ref="R?"  Part="1" 
+AR Path="/6006C464/60097442" Ref="R?"  Part="1" 
+F 0 "R?" V -4607 4450 50  0000 C CNN
+F 1 "10k 5% 0.25W" V -4516 4450 50  0000 C CNN
+F 2 "Resistor_SMD:R_1206_3216Metric_Pad1.42x1.75mm_HandSolder" V -4470 4450 50  0001 C CNN
+F 3 "~" H -4400 4450 50  0001 C CNN
+F 4 "Yageo" H -4400 4450 50  0001 C CNN "MF"
+F 5 "RC1206JR-0710KL" H -4400 4450 50  0001 C CNN "MPN"
+	1    -4400 4450
+	0    1    -1   0   
+$EndComp
+Text GLabel -5000 4450 0    50   Input ~ 0
+PlateControl
+Wire Wire Line
+	-2750 3750 -2700 3750
+Wire Wire Line
+	-2750 3750 -2750 3550
+$Comp
+L power:+5V #PWR?
+U 1 1 600DEE93
+P -2750 3550
+F 0 "#PWR?" H -2750 3400 50  0001 C CNN
+F 1 "+5V" H -2735 3723 50  0000 C CNN
+F 2 "" H -2750 3550 50  0001 C CNN
+F 3 "" H -2750 3550 50  0001 C CNN
+	1    -2750 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x02 J?
+U 1 1 600F59DF
+P -2500 3850
+F 0 "J?" H -2582 4067 50  0000 C CNN
+F 1 "Conn_01x02" H -2582 3976 50  0000 C CNN
+F 2 "HotPlateController:1935161" H -2500 3850 50  0001 C CNN
+F 3 "~" H -2500 3850 50  0001 C CNN
+	1    -2500 3850
+	1    0    0    1   
+$EndComp
+$Comp
+L Device:Q_NMOS_GDS Q?
+U 1 1 60108F2F
+P -4100 4150
+AR Path="/60108F2F" Ref="Q?"  Part="1" 
+AR Path="/5F45E76E/60108F2F" Ref="Q?"  Part="1" 
+AR Path="/5FFB786E/60108F2F" Ref="Q?"  Part="1" 
+AR Path="/6006C464/60108F2F" Ref="Q?"  Part="1" 
+F 0 "Q?" H -3896 4241 50  0000 L CNN
+F 1 "NMOS 60V 300mA" H -3896 4150 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H -3900 4250 50  0001 C CNN
+F 3 "~" H -4100 4150 50  0001 C CNN
+F 4 "" H -4100 4150 50  0001 C CNN "MF"
+F 5 "" H -3896 4059 50  0000 L CNN "MPN"
+F 6 "Nexperia" H -4100 4150 50  0001 C CNN "MF 1"
+F 7 "2N7002,215" H -4100 4150 50  0001 C CNN "MF 1 MPN"
+F 8 "C65189" H -4100 4150 50  0001 C CNN "MF 1 Ordering Code"
+	1    -4100 4150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	-4000 4550 -4000 4450
+Wire Wire Line
+	-4000 4450 -3850 4450
+Connection ~ -4000 4450
+Wire Wire Line
+	-4000 4450 -4000 4350
+$Comp
+L power:GND #PWR?
+U 1 1 60151E0E
+P -3850 4450
+AR Path="/60151E0E" Ref="#PWR?"  Part="1" 
+AR Path="/5F45E76E/60151E0E" Ref="#PWR?"  Part="1" 
+AR Path="/5FFB786E/60151E0E" Ref="#PWR?"  Part="1" 
+AR Path="/6006C464/60151E0E" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H -3850 4200 50  0001 C CNN
+F 1 "GND" H -3845 4277 50  0000 C CNN
+F 2 "" H -3850 4450 50  0001 C CNN
+F 3 "" H -3850 4450 50  0001 C CNN
+	1    -3850 4450
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	-4250 4450 -4000 4450
+Wire Wire Line
+	-4300 4150 -4800 4150
+Wire Wire Line
+	-4800 4150 -4800 4450
+Wire Wire Line
+	-4800 4450 -4550 4450
+Wire Wire Line
+	-4300 4750 -4800 4750
+Wire Wire Line
+	-4800 4750 -4800 4450
+Connection ~ -4800 4450
+Wire Wire Line
+	-4800 4450 -5000 4450
+Wire Wire Line
+	-4000 3950 -4000 3850
+Wire Wire Line
+	-4000 3850 -3000 3850
+Wire Wire Line
+	-4000 4950 -4000 5000
+Wire Wire Line
+	-4000 5000 -3000 5000
+Wire Wire Line
+	-3000 5000 -3000 3850
+Wire Wire Line
+	-3000 3850 -2700 3850
+Connection ~ -3000 3850
 $EndSCHEMATC
