@@ -16,23 +16,23 @@ $EndDescr
 $Comp
 L Sensor_Temperature:MAX31855KASA U3
 U 1 1 5F92CAE2
-P 9650 5550
-F 0 "U3" H 10050 6050 50  0000 C CNN
-F 1 "MAX31855KASA" H 10300 5950 50  0000 C CNN
-F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 10650 5200 50  0001 C CIN
-F 3 "http://datasheets.maximintegrated.com/en/ds/MAX31855.pdf" H 9650 5550 50  0001 C CNN
-	1    9650 5550
+P 9450 4950
+F 0 "U3" H 9850 5450 50  0000 C CNN
+F 1 "MAX31855KASA" H 10100 5350 50  0000 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 10450 4600 50  0001 C CIN
+F 3 "http://datasheets.maximintegrated.com/en/ds/MAX31855.pdf" H 9450 4950 50  0001 C CNN
+	1    9450 4950
 	1    0    0    -1  
 $EndComp
 $Comp
 L Connector_Generic:Conn_01x02 J1
 U 1 1 5F92E2A4
-P 8750 5550
-F 0 "J1" H 8668 5225 50  0000 C CNN
-F 1 "Thermocouple" H 8668 5316 50  0000 C CNN
-F 2 "TerminalBlock_TE-Connectivity:TerminalBlock_TE_282834-2_1x02_P2.54mm_Horizontal" H 8750 5550 50  0001 C CNN
-F 3 "~" H 8750 5550 50  0001 C CNN
-	1    8750 5550
+P 8550 4950
+F 0 "J1" H 8468 4625 50  0000 C CNN
+F 1 "Thermocouple" H 8468 4716 50  0000 C CNN
+F 2 "TerminalBlock_TE-Connectivity:TerminalBlock_TE_282834-2_1x02_P2.54mm_Horizontal" H 8550 4950 50  0001 C CNN
+F 3 "~" H 8550 4950 50  0001 C CNN
+	1    8550 4950
 	-1   0    0    1   
 $EndComp
 $Comp
@@ -75,9 +75,7 @@ Wire Wire Line
 Wire Wire Line
 	8800 1650 8800 1850
 Wire Wire Line
-	8250 1200 7800 1200
-Text Label 7800 1200 0    50   ~ 0
-Status_LED
+	8250 1200 8050 1200
 $Comp
 L Device:LED D2
 U 1 1 5FFAA004
@@ -118,9 +116,7 @@ Wire Wire Line
 Wire Wire Line
 	10500 1650 10500 1850
 Wire Wire Line
-	9950 1200 9500 1200
-Text Label 9500 1200 0    50   ~ 0
-Hot_LED
+	9950 1200 9750 1200
 $Comp
 L Connector_Generic:Conn_01x02 J4
 U 1 1 5FFAA848
@@ -156,39 +152,39 @@ Wire Wire Line
 Text Label 7550 4900 2    50   ~ 0
 SSRelay_Trigger
 Wire Wire Line
-	8950 5550 9050 5550
+	8750 4950 8850 4950
 Wire Wire Line
-	9050 5550 9050 5650
+	8850 4950 8850 5050
 Wire Wire Line
-	9050 5650 9250 5650
+	8850 5050 9050 5050
 Wire Wire Line
-	8950 5450 9250 5450
+	8750 4850 9050 4850
 $Comp
 L power:+3V3 #PWR0104
 U 1 1 5FFB7CD6
-P 9650 5050
-F 0 "#PWR0104" H 9650 4900 50  0001 C CNN
-F 1 "+3V3" H 9665 5223 50  0000 C CNN
-F 2 "" H 9650 5050 50  0001 C CNN
-F 3 "" H 9650 5050 50  0001 C CNN
-	1    9650 5050
+P 9450 4450
+F 0 "#PWR0104" H 9450 4300 50  0001 C CNN
+F 1 "+3V3" H 9465 4623 50  0000 C CNN
+F 2 "" H 9450 4450 50  0001 C CNN
+F 3 "" H 9450 4450 50  0001 C CNN
+	1    9450 4450
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	9650 5050 9650 5150
+	9450 4450 9450 4550
 $Comp
 L power:GND #PWR0105
 U 1 1 5FFBB35B
-P 9650 6100
-F 0 "#PWR0105" H 9650 5850 50  0001 C CNN
-F 1 "GND" H 9655 5927 50  0000 C CNN
-F 2 "" H 9650 6100 50  0001 C CNN
-F 3 "" H 9650 6100 50  0001 C CNN
-	1    9650 6100
+P 9450 5500
+F 0 "#PWR0105" H 9450 5250 50  0001 C CNN
+F 1 "GND" H 9455 5327 50  0000 C CNN
+F 2 "" H 9450 5500 50  0001 C CNN
+F 3 "" H 9450 5500 50  0001 C CNN
+	1    9450 5500
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	9650 5950 9650 6100
+	9450 5350 9450 5500
 $Comp
 L Sensor_Current:ACS712xLCTR-20A U2
 U 1 1 5FFC34DE
@@ -197,6 +193,9 @@ F 0 "U2" V 2746 4906 50  0000 R CNN
 F 1 "ACS712xLCTR-20A" V 2655 4906 50  0000 R CNN
 F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 2800 5000 50  0001 L CIN
 F 3 "http://www.allegromicro.com/~/media/Files/Datasheets/ACS712-Datasheet.ashx?la=en" H 2700 5350 50  0001 C CNN
+F 4 "Allegro MicroSystems, LLC" H 2700 5350 50  0001 C CNN "MF"
+F 5 "ACS712ELCTR-20A-T" H 2700 5350 50  0001 C CNN "MPN"
+F 6 "C10681" H 2700 5350 50  0001 C CNN "Ordering Code"
 	1    2700 5350
 	0    -1   -1   0   
 $EndComp
@@ -318,10 +317,10 @@ Wire Wire Line
 Connection ~ 2200 5900
 Wire Wire Line
 	2200 5900 1650 5900
-Text Label 10700 5350 2    50   ~ 0
+Text Label 10550 4750 2    50   ~ 0
 ESP32_SPI_SCK
 Wire Wire Line
-	10050 5350 10700 5350
+	9850 4750 10550 4750
 $Comp
 L Device:R R?
 U 1 1 5FFD3016
@@ -756,7 +755,7 @@ U3 Bypass Capacitors
 Wire Notes Line
 	800  1300 1700 1300
 Text GLabel 5075 1525 0    50   Input ~ 0
-PairSwitch_CTLI
+UserSwitch
 Wire Wire Line
 	5075 1525 5225 1525
 Text Notes 5525 575  0    50   ~ 0
@@ -850,9 +849,38 @@ MTDO Pin has internal pull up\nU0TX Active : 0\nU0TX Disabled: 1
 Text Label 5325 1525 0    50   ~ 0
 IO0
 Text GLabel 3775 2525 2    50   Input ~ 0
-PairLED_CTLO
+StatusLED
 Text GLabel 3775 2425 2    50   Input ~ 0
-PairSwitch_CTLI
+UserSwitch
 Text GLabel 3725 3125 2    50   Input ~ 0
 Solenoid_1_CTLO
+Text Label 10550 4850 2    50   ~ 0
+ESP32_SPI_MISO
+Wire Wire Line
+	9850 4850 10550 4850
+Text Label 11050 5050 2    50   ~ 0
+ESP32_SPI_TEMPSENSOR_1_CS
+Wire Wire Line
+	9850 5050 11050 5050
+Text GLabel 8050 1200 0    50   Input ~ 0
+StatusLED
+Text GLabel 9750 1200 0    50   Input ~ 0
+HotLED
+Text GLabel 12450 1050 0    50   Input ~ 0
+HotLED
+$Comp
+L power:+5V #PWR?
+U 1 1 5FFE63B0
+P 2150 5250
+F 0 "#PWR?" H 2150 5100 50  0001 C CNN
+F 1 "+5V" H 2165 5423 50  0000 C CNN
+F 2 "" H 2150 5250 50  0001 C CNN
+F 3 "" H 2150 5250 50  0001 C CNN
+	1    2150 5250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2150 5250 2150 5350
+Wire Wire Line
+	2150 5350 2300 5350
 $EndSCHEMATC
