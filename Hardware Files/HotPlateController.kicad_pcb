@@ -2,7 +2,7 @@
 
   (general
     (thickness 1.6)
-    (drawings 72)
+    (drawings 76)
     (tracks 266)
     (zones 0)
     (modules 40)
@@ -15,7 +15,7 @@
     (31 B.Cu signal)
     (32 B.Adhes user hide)
     (33 F.Adhes user hide)
-    (34 B.Paste user hide)
+    (34 B.Paste user)
     (35 F.Paste user hide)
     (36 B.SilkS user hide)
     (37 F.SilkS user)
@@ -5749,6 +5749,14 @@
     )
   )
 
+  (gr_line (start 1.5 64.5) (end 13 64.5) (layer F.SilkS) (width 0.12) (tstamp 5FFF4B4A))
+  (gr_line (start 1.5 67) (end 1.5 64.5) (layer F.SilkS) (width 0.12) (tstamp 5FFF4B49))
+  (gr_text "Order Number" (at 4 64) (layer F.SilkS) (tstamp 5FFF4B48)
+    (effects (font (size 0.5 0.5) (thickness 0.1)))
+  )
+  (gr_text JLCJLCJLCJLC (at 7 66) (layer F.SilkS) (tstamp 5FFF4B47)
+    (effects (font (size 1 1) (thickness 0.15)))
+  )
   (gr_line (start 69.75 72.5) (end 71.5 74.25) (layer F.SilkS) (width 0.25) (tstamp 5FFFBC5B))
   (gr_line (start 71.75 71.75) (end 73.25 73.25) (layer F.SilkS) (width 0.25) (tstamp 5FFFBC5A))
   (gr_line (start 71.75 68.25) (end 74.25 70.75) (layer F.SilkS) (width 0.25) (tstamp 5FFFBC59))
