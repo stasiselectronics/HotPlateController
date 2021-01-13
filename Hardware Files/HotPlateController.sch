@@ -617,72 +617,27 @@ $EndComp
 $Comp
 L Connector_Generic:Conn_02x04_Odd_Even J?
 U 1 1 5FFD30DC
-P -3425 4425
+P -3550 4250
 AR Path="/5FFB9C6F/5FFD30DC" Ref="J?"  Part="1" 
 AR Path="/5FFD30DC" Ref="J2"  Part="1" 
-F 0 "J2" H -3375 4742 50  0000 C CNN
-F 1 "0.100\" 2x4 Header" H -3375 4651 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_2x04_P2.54mm_Vertical" H -3425 4425 50  0001 C CNN
-F 3 "~" H -3425 4425 50  0001 C CNN
-F 4 "XFCN" H -3425 4425 50  0001 C CNN "MF 1"
-F 5 "PZ254V-12-8P" H -3425 4425 50  0001 C CNN "MF 1 MPN"
-F 6 "C492421" H -3425 4425 50  0001 C CNN "MF 1 Ordering Code"
-	1    -3425 4425
+F 0 "J2" H -3500 4567 50  0000 C CNN
+F 1 "0.100\" 2x4 Header" H -3500 4476 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x04_P2.54mm_Vertical" H -3550 4250 50  0001 C CNN
+F 3 "~" H -3550 4250 50  0001 C CNN
+F 4 "XFCN" H -3550 4250 50  0001 C CNN "MF 1"
+F 5 "PZ254V-12-8P" H -3550 4250 50  0001 C CNN "MF 1 MPN"
+F 6 "C492421" H -3550 4250 50  0001 C CNN "MF 1 Ordering Code"
+	1    -3550 4250
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	-3125 4325 -2775 4325
-Wire Wire Line
-	-3125 4425 -2775 4425
-Wire Wire Line
-	-3125 4525 -2775 4525
-Wire Wire Line
-	-3125 4625 -2775 4625
-Text Label -2775 4325 2    50   ~ 0
+Text Label -2850 4150 2    50   ~ 0
 EN
-Text Label -2775 4425 2    50   ~ 0
+Text Label -2850 4250 2    50   ~ 0
 IO0
-Text Label -2775 4625 2    50   ~ 0
+Text Label -2850 4450 2    50   ~ 0
 USB_RX
-Text Label -2775 4525 2    50   ~ 0
+Text Label -2850 4350 2    50   ~ 0
 USB_TX
-Wire Wire Line
-	-3625 4325 -3725 4325
-Wire Wire Line
-	-3725 4325 -3725 4425
-Wire Wire Line
-	-3725 4525 -3625 4525
-Wire Wire Line
-	-3625 4425 -3725 4425
-Connection ~ -3725 4425
-Wire Wire Line
-	-3725 4425 -3725 4525
-Wire Wire Line
-	-3625 4625 -3625 4875
-Text Label -3275 4875 2    50   ~ 0
-VREG_IN
-Wire Wire Line
-	-3625 4875 -3275 4875
-$Comp
-L power:GND #PWR?
-U 1 1 5FFD30F3
-P -3825 4625
-AR Path="/5F45F2B5/5FFD30F3" Ref="#PWR?"  Part="1" 
-AR Path="/5FFD30F3" Ref="#PWR06"  Part="1" 
-AR Path="/5FFB786E/5FFD30F3" Ref="#PWR?"  Part="1" 
-AR Path="/5FFB9C6F/5FFD30F3" Ref="#PWR?"  Part="1" 
-F 0 "#PWR06" H -3825 4375 50  0001 C CNN
-F 1 "GND" H -3820 4452 50  0000 C CNN
-F 2 "" H -3825 4625 50  0001 C CNN
-F 3 "" H -3825 4625 50  0001 C CNN
-	1    -3825 4625
-	-1   0    0    -1  
-$EndComp
-Wire Wire Line
-	-3825 4625 -3725 4625
-Wire Wire Line
-	-3725 4625 -3725 4525
-Connection ~ -3725 4525
 Wire Notes Line
 	4925 2450 5775 2450
 Text Notes -1825 4200 0    50   ~ 0
@@ -697,36 +652,36 @@ Text Notes 5525 575  0    50   ~ 0
 User Pair Switch
 Wire Notes Line
 	5475 575  6225 575 
-Text Notes -3775 3975 0    50   ~ 0
+Text Notes -3775 3775 0    50   ~ 0
 Programming Header
 Wire Notes Line
-	-2925 3975 -3825 3975
-Text Notes -3825 5325 0    50   ~ 0
+	-2925 3775 -3825 3775
+Text Notes -3925 5225 0    50   ~ 0
 EN
-Text Notes -3875 5525 0    50   ~ 0
+Text Notes -3975 5425 0    50   ~ 0
 IO 0
-Text Notes -3875 5075 0    50   ~ 0
+Text Notes -3975 4975 0    50   ~ 0
 To enter programming mode
 Wire Notes Line style solid
-	-3675 5225 -3575 5225
+	-3775 5125 -3675 5125
 Wire Notes Line style solid
-	-3575 5225 -3575 5325
+	-3675 5125 -3675 5225
 Wire Notes Line style solid
-	-3575 5325 -3375 5325
+	-3675 5225 -3475 5225
 Wire Notes Line style solid
-	-3375 5325 -3375 5225
+	-3475 5225 -3475 5125
 Wire Notes Line style solid
-	-3525 5425 -3525 5525
+	-3625 5325 -3625 5425
 Wire Notes Line style solid
-	-3525 5525 -3175 5525
+	-3625 5425 -3275 5425
 Wire Notes Line style solid
-	-3175 5525 -3175 5425
+	-3275 5425 -3275 5325
 Wire Notes Line style solid
-	-3175 5425 -2925 5425
+	-3275 5325 -3025 5325
 Wire Notes Line style solid
-	-3675 5425 -3525 5425
+	-3775 5325 -3625 5325
 Wire Notes Line style solid
-	-3375 5225 -2925 5225
+	-3475 5125 -3025 5125
 Wire Notes Line
 	5800 2975 6275 2975
 $Comp
@@ -1397,4 +1352,56 @@ Wire Wire Line
 	3700 1750 3850 1750
 Wire Wire Line
 	2500 2450 2400 2450
+$Comp
+L power:GND #PWR?
+U 1 1 60027562
+P -3850 4600
+AR Path="/5F45F2B5/60027562" Ref="#PWR?"  Part="1" 
+AR Path="/60027562" Ref="#PWR?"  Part="1" 
+AR Path="/5FFB786E/60027562" Ref="#PWR?"  Part="1" 
+AR Path="/5FFB9C6F/60027562" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H -3850 4350 50  0001 C CNN
+F 1 "GND" H -3845 4427 50  0000 C CNN
+F 2 "" H -3850 4600 50  0001 C CNN
+F 3 "" H -3850 4600 50  0001 C CNN
+	1    -3850 4600
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	-3850 4600 -3850 4350
+Wire Wire Line
+	-3850 4350 -3750 4350
+Wire Wire Line
+	-3850 4350 -3850 4250
+Wire Wire Line
+	-3850 4250 -3750 4250
+Connection ~ -3850 4350
+Wire Wire Line
+	-3750 4150 -3850 4150
+Wire Wire Line
+	-3850 4150 -3850 4250
+Connection ~ -3850 4250
+$Comp
+L power:+5V #PWR?
+U 1 1 6003E7C7
+P -4050 4150
+F 0 "#PWR?" H -4050 4000 50  0001 C CNN
+F 1 "+5V" H -4035 4323 50  0000 C CNN
+F 2 "" H -4050 4150 50  0001 C CNN
+F 3 "" H -4050 4150 50  0001 C CNN
+	1    -4050 4150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	-4050 4150 -4050 4450
+Wire Wire Line
+	-4050 4450 -3750 4450
+Wire Wire Line
+	-3250 4450 -2850 4450
+Wire Wire Line
+	-2850 4350 -3250 4350
+Wire Wire Line
+	-3250 4250 -2850 4250
+Wire Wire Line
+	-3250 4150 -2850 4150
 $EndSCHEMATC
