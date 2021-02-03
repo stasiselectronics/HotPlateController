@@ -1404,4 +1404,8 @@ Wire Wire Line
 	-3250 4250 -2850 4250
 Wire Wire Line
 	-3250 4150 -2850 4150
+Text GLabel 4100 1250 2    50   Input ~ 0
+PlateControl
+Wire Wire Line
+	4100 1250 3700 1250
 $EndSCHEMATC
