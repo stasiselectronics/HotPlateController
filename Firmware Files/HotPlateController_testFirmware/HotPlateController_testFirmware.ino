@@ -14,12 +14,19 @@
 #include <LITTLEFS.h>
 #include <ArduinoJson.h>
 #include <AsyncJson.h>
+#include <max6675.h>
 
 // Pin Definitions
 #define LED_STATUS 13
-#define LED_HEATER 17
+#define LED_HEATER 9
 #define CONTROL_HEATER 2
 #define CURRENT_SENSOR 35
+
+int thermoDO = 19;
+int thermoCS = 23;
+int thermoCLK = 5;
+
+MAX6675 thermocouple(thermoCLK, thermoCS, thermoDO);
 
 // WiFi Credentials
 const char* ssid = "comhem_56E137";
@@ -86,6 +93,8 @@ void loop() {
   delay(850);
   digitalWrite(LED_STATUS, !digitalRead(LED_STATUS));
   digitalWrite(LED_HEATER, !digitalRead(LED_HEATER));
+  digitalWrite(CONTROL_HEATER, !digitalRead(CONTROL_HEATER));
+  //Serial.println((String)thermocouple.readCelsius());
 
 }
 
