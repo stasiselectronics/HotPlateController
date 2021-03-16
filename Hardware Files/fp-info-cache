@@ -1,4 +1,4 @@
-19008664496289268
+19010280387612665
 .DesignArchive
 PTS636_SM25F_SMTR_LFS
 
@@ -51724,6 +51724,13 @@ silkscreenart_2
 0
 HotPlateController
 silkscreenart_back
+
+
+0
+0
+0
+HotPlateController
+silkscreenart_bottom
 
 
 0
