@@ -14,19 +14,18 @@
 #include <LITTLEFS.h>
 #include <ArduinoJson.h>
 #include <AsyncJson.h>
-#include <max6675.h>
 
 // Pin Definitions
-#define LED_STATUS 13
-#define LED_HEATER 9
+#define LED_STATUS 12 
+#define LED_HEATER 13
 #define CONTROL_HEATER 2
 #define CURRENT_SENSOR 35
+#define FIVEVRAIL 34
 
 int thermoDO = 19;
 int thermoCS = 23;
 int thermoCLK = 5;
 
-MAX6675 thermocouple(thermoCLK, thermoCS, thermoDO);
 
 // WiFi Credentials
 const char* ssid = "comhem_56E137";
@@ -69,6 +68,7 @@ void setup() {
   }
 
   // Begin WiFi
+  Serial.println("Starting Wifi");
   WiFi.begin(ssid, password);
   Serial.print("Connecting to WiFi ");
   static unsigned long start_time = millis();
@@ -94,6 +94,13 @@ void loop() {
   digitalWrite(LED_STATUS, !digitalRead(LED_STATUS));
   digitalWrite(LED_HEATER, !digitalRead(LED_HEATER));
   digitalWrite(CONTROL_HEATER, !digitalRead(CONTROL_HEATER));
+  double current_sensor_voltage = analogRead(CURRENT_SENSOR);
+  double fiveVRail_voltage = analogRead(FIVEVRAIL);
+  current_sensor_voltage = current_sensor_voltage / 4096 * 5;
+  fiveVRail_voltage = fiveVRail_voltage / 4096 * 5 * 2;
+  Serial.print(current_sensor_voltage);Serial.print(",");
+  Serial.print(fiveVRail_voltage);Serial.print(",");
+  Serial.println(current_sensor_voltage/fiveVRail_voltage);
   //Serial.println((String)thermocouple.readCelsius());
 
 }
