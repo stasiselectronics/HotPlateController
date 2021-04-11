@@ -12,7 +12,7 @@
 #define BAUD_RATE 115200
 #define ENABLE_DEBUG_OUTPUT //comment out to disable debug output
 
-// Copy and paste this around debug output to add enable/diable control
+// Copy and paste this around debug output to add enable/disable control
 
 #ifdef ENABLE_DEBUG_OUTPUT
 // Debug Output Code 
@@ -127,8 +127,9 @@ void setup() {
       #endif
     }
   }
-
+  
   // We are now connected to the WiFi network
+  digitalWrite(LED_HEATER, HIGH);
   #ifdef ENABLE_DEBUG_OUTPUT
   Serial.print("\n\n");
   Serial.println("Device connected successfully");
