@@ -40,24 +40,23 @@ const char* mqtt_Tag = "Lab/HotPlate/";
 #define CONTROL_HEATER 2      // MOSFET Gate signal, used to turn on and off the solid state relay to control heating element
 #define CURRENT_SENSOR 35     // Voltage output of the current sensor, will produce sinusoidal waveform proportional to AC current
 #define FIVE_VOLT_RAIL 34     // 5V supply rail divided in half to fit within ESP32's ADC window of 0-3.3V. Expect 2.5V
+#define THERMO_DO 19
+#define THERMO_CS 23
+#define THERMO_CLK 5
 
 // Function Calls
 // Place here to help the compiler know where to look for extra functions
-bool setup_wifi();
-void mqtt_reconnect();
+void mqtt_refreshConnection();
 
 // Global Objects
 // These help get things going
 WiFiClient myWiFiClient;
 PubSubClient client(myWiFiClient);
+Adafruit_MAX31855 thermocouple(THERMO_CLK, THERMO_CS, THERMO_DO);
 
 // Message buffers to make sure data types play nice with each other
 #define BUFFER_SIZE 512
 char msg_buffer[BUFFER_SIZE];
-
-// Global Function Names
-void mqtt_refreshConnection();
-
 
 void setup() {
   // Title Card
@@ -102,6 +101,13 @@ void setup() {
   #endif
   pinMode(FIVE_VOLT_RAIL,     OUTPUT);
 
+  // Setup thermocouple
+  if (!thermocouple.begin()) {
+    #ifdef ENABLE_DEBUG_OUTPUT
+    Serial.println("Failed to initialize thermocouple");
+    #endif
+  }
+  
   // Setup WiFi
   #ifdef ENABLE_DEBUG_OUTPUT
   Serial.println("** Starting WiFi Initialization **");
@@ -145,7 +151,8 @@ void setup() {
 }
 
 void loop() {
-  
+  unsigned long current_time = millis();
+  static unsigned long timer_1 = current_time;
   #ifdef ENABLE_DEBUG_OUTPUT
   static bool run_once = true;
   if(run_once){
@@ -157,7 +164,24 @@ void loop() {
   if(!client.connected()){
     mqtt_refreshConnection();
   }
-  
+
+  if(current_time - timer_1 > 1000){
+    timer_1 = current_time;
+    // Actions every 1 second
+    String myRSSI = (String) WiFi.RSSI();
+    myRSSI.toCharArray(msg_buffer, BUFFER_SIZE);
+    Serial.print("RSSI: ");
+    Serial.println(myRSSI);
+    client.publish("Lab/HotPlate/RSSI", msg_buffer);
+
+    String myTemp = (String) thermocouple.readCelsius();
+    myTemp.toCharArray(msg_buffer, BUFFER_SIZE);
+    Serial.print("Temp: ");
+    Serial.println(myTemp);
+    client.publish("Lab/HotPlate/Temperature", msg_buffer);
+
+    
+  }
   client.loop(); //process any new messages and trigger any callbacks
   yield(); // To keep the board running and feed watchdogs
 }
