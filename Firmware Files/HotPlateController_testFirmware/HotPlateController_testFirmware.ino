@@ -18,6 +18,8 @@
 #include <ArduinoJson.h>
 #include "Adafruit_MAX31855.h"
 #include <AsyncJson.h>
+#include <PubSubClient.h>
+
 
 // Pin Definitions
 #define LED_STATUS 12 
@@ -34,8 +36,17 @@ int thermoCLK = 5;
 Adafruit_MAX31855 thermocouple(thermoCLK, thermoCS, thermoDO);
 
 // WiFi Credentials
+// Change these for your own network details
 const char* ssid = "comhem_56E137";
 const char* password =  "9zpht1au";
+const char* mqtt_server = "raspberrypi.local";
+
+// MQTT settings
+WiFiClient espClient;
+PubSubClient client(espClient);
+#define MSG_BUFFER_SIZE  (50)
+char msg[MSG_BUFFER_SIZE];
+void reconnect();
 
 // Start webserver on normal HTTP port 80
 AsyncWebServer server(80);
@@ -99,29 +110,53 @@ void setup() {
   Serial.println("Device successfully connected");
   Serial.print("IPv4 Address:");Serial.println(WiFi.localIP());
 
+  Serial.println("Connecting to MQTT Server");
+  client.setServer(mqtt_server, 1883);
   
 }
 
 void loop() {
-  yield();
-  delay(850);
-  digitalWrite(LED_STATUS, !digitalRead(LED_STATUS));
-  digitalWrite(LED_HEATER, !digitalRead(LED_HEATER));
-  digitalWrite(CONTROL_HEATER, !digitalRead(CONTROL_HEATER));
-  double current_sensor_voltage = analogRead(CURRENT_SENSOR);
-  double fiveVRail_voltage = analogRead(FIVEVRAIL);
-  current_sensor_voltage = current_sensor_voltage / 4096 * 5;
-  fiveVRail_voltage = fiveVRail_voltage / 4096 * 5 * 2;
-  Serial.print(current_sensor_voltage);Serial.print(",");
-  Serial.print(fiveVRail_voltage);Serial.print(",");
-  Serial.print(current_sensor_voltage/fiveVRail_voltage);Serial.print(",");
-  //Serial.println((String)thermocouple.readCelsius());
-  double c = thermocouple.readCelsius();
-  if (!isnan(c)) {
-     Serial.println(c);
-   }
+  // Main operating code
 
+  if (!client.connected()){
+    reconnect(); // frequently check if we have lost connection
+    // could add some function to handle lost connections, like software reset
+  }
+  client.loop(); //process any new messages and trigger any callbacks
+
+  unsigned long now = millis();
+  unsigned static long lastMsg = now;
+  if(now-lastMsg > 1000){
+    // Non blocking delay to schedule actions
+    lastMsg = now; // you ever look at word long enough and it just starts to look weird? now, now now now now enne oh double you now
+    String myRSSI = (String) WiFi.RSSI();
+    myRSSI.toCharArray(msg, MSG_BUFFER_SIZE);
+    Serial.print("Publish message: ");
+    Serial.println(myRSSI);
+    client.publish("Lab/HotePlate/RSSI", msg);
+  }
 }
+
+//void loop() {
+//  yield();
+//  delay(850);
+//  digitalWrite(LED_STATUS, !digitalRead(LED_STATUS));
+//  digitalWrite(LED_HEATER, !digitalRead(LED_HEATER));
+//  digitalWrite(CONTROL_HEATER, !digitalRead(CONTROL_HEATER));
+//  double current_sensor_voltage = analogRead(CURRENT_SENSOR);
+//  double fiveVRail_voltage = analogRead(FIVEVRAIL);
+//  current_sensor_voltage = current_sensor_voltage / 4096 * 5;
+//  fiveVRail_voltage = fiveVRail_voltage / 4096 * 5 * 2;
+//  Serial.print(current_sensor_voltage);Serial.print(",");
+//  Serial.print(fiveVRail_voltage);Serial.print(",");
+//  Serial.print(current_sensor_voltage/fiveVRail_voltage);Serial.print(",");
+//  //Serial.println((String)thermocouple.readCelsius());
+//  double c = thermocouple.readCelsius();
+//  if (!isnan(c)) {
+//     Serial.println(c);
+//   }
+//
+//}
 
 // Stolen from the example sketch on how to list files in a dir
 void listDir(fs::FS &fs, const char * dirname, uint8_t levels) {
@@ -152,5 +187,27 @@ void listDir(fs::FS &fs, const char * dirname, uint8_t levels) {
       Serial.println(file.size());
     }
     file = root.openNextFile();
+  }
+}
+
+void reconnect() {
+  // Loop until we're reconnected
+  while (!client.connected()) {
+    Serial.print("Attempting MQTT connection...");
+    String clientId = "Hot Plate";
+    // Attempt to connect
+    if (client.connect(clientId.c_str())) {
+      Serial.println("connected");
+      // Once connected, publish an announcement...
+      client.publish("outTopic", "hello world");
+      // ... and resubscribe
+      client.subscribe("inTopic");
+    } else {
+      Serial.print("failed, rc=");
+      Serial.print(client.state());
+      Serial.println(" try again in 5 seconds");
+      // Wait 5 seconds before retrying
+      delay(100);
+    }
   }
 }
