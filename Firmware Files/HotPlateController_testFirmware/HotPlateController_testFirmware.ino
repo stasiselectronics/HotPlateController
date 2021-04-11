@@ -1,3 +1,5 @@
+
+
 ////# # # # # # # # # # # # # # # # # # # # # # # # # #
 //// Chandler McCowan
 //// Hot Plate Controller Test Firmware
@@ -10,9 +12,11 @@
 
 // Libraries
 #include <WiFi.h>
+#include <SPI.h>
 #include "ESPAsyncWebServer.h"
 #include <LITTLEFS.h>
 #include <ArduinoJson.h>
+#include "Adafruit_MAX31855.h"
 #include <AsyncJson.h>
 
 // Pin Definitions
@@ -26,6 +30,8 @@ int thermoDO = 19;
 int thermoCS = 23;
 int thermoCLK = 5;
 
+// initialize the Thermocouple
+Adafruit_MAX31855 thermocouple(thermoCLK, thermoCS, thermoDO);
 
 // WiFi Credentials
 const char* ssid = "comhem_56E137";
@@ -51,8 +57,16 @@ void setup() {
   pinMode(CONTROL_HEATER, OUTPUT);
   pinMode(CURRENT_SENSOR, INPUT );
 
+  // Thermocouple Sensor Initialization
+  delay(500);
+  Serial.print("Initializing Thermocouple Sensor...");
+  if (!thermocouple.begin()) {
+    Serial.println("ERROR.");
+    while (1) delay(10);
+  }
+  Serial.println("DONE.\n\n\n");
 
-  // Web Server Initialization
+  // File System Initialization
   Serial.println("Mounting LittleFS Filesystem");
   if (!LITTLEFS.begin(FORMAT_LITTLEFS_IF_FAILED)) {
     Serial.println("LITTLEFS Mount failed!");
@@ -100,8 +114,12 @@ void loop() {
   fiveVRail_voltage = fiveVRail_voltage / 4096 * 5 * 2;
   Serial.print(current_sensor_voltage);Serial.print(",");
   Serial.print(fiveVRail_voltage);Serial.print(",");
-  Serial.println(current_sensor_voltage/fiveVRail_voltage);
+  Serial.print(current_sensor_voltage/fiveVRail_voltage);Serial.print(",");
   //Serial.println((String)thermocouple.readCelsius());
+  double c = thermocouple.readCelsius();
+  if (!isnan(c)) {
+     Serial.println(c);
+   }
 
 }
 
