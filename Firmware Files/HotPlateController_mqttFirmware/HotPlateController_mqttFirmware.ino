@@ -23,6 +23,7 @@
 #include <SPI.h>
 #include <PubSubClient.h>
 #include "Adafruit_MAX31855.h"
+#include <EEPROM.h>
 
 
 // Network Details - Change these to match your own network!
@@ -44,15 +45,21 @@ const char* mqtt_Tag = "Lab/HotPlate/";
 #define THERMO_CS 23
 #define THERMO_CLK 5
 
+// Memory Settings
+#define EEPROM_SIZE 256
+
 // Function Calls
 // Place here to help the compiler know where to look for extra functions
 void mqtt_refreshConnection();
+void mqtt_parse_message(char* topic, byte* message, unsigned int length);
 
 // Global Objects
 // These help get things going
 WiFiClient myWiFiClient;
 PubSubClient client(myWiFiClient);
 Adafruit_MAX31855 thermocouple(THERMO_CLK, THERMO_CS, THERMO_DO);
+volatile int cutoffTemperature = 25;
+int cutoffTemperature_ADDR = 0;
 
 // Message buffers to make sure data types play nice with each other
 #define BUFFER_SIZE 512
@@ -61,11 +68,10 @@ char msg_buffer[BUFFER_SIZE];
 void setup() {
   // Title Card
   #ifdef ENABLE_DEBUG_OUTPUT
-  String TitleCard = "Hot Plate Controller\nMQTT Firmware";
-  TitleCard  = ("======================================================\n");
-  TitleCard += ("===  Hotplate Controller MQTT Firmware  ==============\n");
-  TitleCard += ("===  Start of Sketch                    ==============\n");
-  TitleCard += ("======================================================\n");
+  String  TitleCard  = ("======================================================\n");
+          TitleCard += ("===  Hotplate Controller MQTT Firmware  ==============\n");
+          TitleCard += ("===  Start of Sketch                    ==============\n");
+          TitleCard += ("======================================================\n");
 
   // Setup Comm links
   Serial.begin(BAUD_RATE);
@@ -107,6 +113,10 @@ void setup() {
     Serial.println("Failed to initialize thermocouple");
     #endif
   }
+
+  // Setup Memory
+  EEPROM.begin(EEPROM_SIZE);
+  cutoffTemperature = EEPROM.read(cutoffTemperature_ADDR);
   
   // Setup WiFi
   #ifdef ENABLE_DEBUG_OUTPUT
@@ -165,22 +175,34 @@ void loop() {
   if(!client.connected()){
     mqtt_refreshConnection();
   }
-
+   
   if(current_time - timer_1 > 1000){
     timer_1 = current_time;
     // Actions every 1 second
     String myRSSI = (String) WiFi.RSSI();
     myRSSI.toCharArray(msg_buffer, BUFFER_SIZE);
-    Serial.print("RSSI: ");
-    Serial.println(myRSSI);
     client.publish("Lab/HotPlate/RSSI", msg_buffer);
 
     String myTemp = (String) thermocouple.readCelsius();
     myTemp.toCharArray(msg_buffer, BUFFER_SIZE);
-    Serial.print("Temp: ");
-    Serial.println(myTemp);
     client.publish("Lab/HotPlate/Temperature", msg_buffer);
 
+ 
+    String myStatus = digitalRead(CONTROL_HEATER) ? "true":"false";
+    myStatus.toCharArray(msg_buffer, BUFFER_SIZE);
+    client.publish("Lab/HotPlate/HeaterStatus", msg_buffer);
+
+    String myCutoff = (String) cutoffTemperature;
+    myCutoff.toCharArray(msg_buffer, BUFFER_SIZE);
+    client.publish("Lab/HotPlate/CutOff", msg_buffer);
+    
+    #ifdef DISABLE_DEBUG_OUTPUT
+    Serial.println("** Values Sent **");
+    Serial.print("RSSI: ");Serial.println(myRSSI);
+    Serial.print("Temperature: ");Serial.println(myTemp);
+    Serial.print("Heater status: ");Serial.println(myStatus);
+    Serial.print("Cut Off Temp: ");Serial.println(myCutoff);
+    #endif
     
   }
   client.loop(); //process any new messages and trigger any callbacks
@@ -196,6 +218,8 @@ void mqtt_refreshConnection(){
 
   client.setServer(mqtt_server, 1883);
   client.connect(mqtt_clientID);
+  client.setCallback(mqtt_parse_message);
+  client.subscribe("Lab/HotPlate/#");
   
   long start_time = millis();
   bool done_flag = false;
@@ -212,5 +236,30 @@ void mqtt_refreshConnection(){
         break;
       }
     }
+  }
+}
+
+void mqtt_parse_message(char* topic, byte* message, unsigned int length) {
+  String messageTemp;
+  for (int i = 0; i < length; i++) {
+    messageTemp += (char)message[i];
+  }
+  if (String(topic) == "Lab/HotPlate/SetStatus") {
+    Serial.print("Changing output to ");
+    if(messageTemp == "true"){
+      Serial.println("on");
+      digitalWrite(CONTROL_HEATER, HIGH);
+      digitalWrite(LED_HEATER, HIGH);
+    }
+    else if(messageTemp == "false"){
+      Serial.println("off");
+      digitalWrite(CONTROL_HEATER, LOW);
+      digitalWrite(LED_HEATER, LOW);
+    }
+  }
+  if (String(topic) == "Lab/HotPlate/SetCufOff") {
+    Serial.print("Changing output to ");
+    cutoffTemperature = messageTemp.toInt();
+    Serial.println(messageTemp);
   }
 }
