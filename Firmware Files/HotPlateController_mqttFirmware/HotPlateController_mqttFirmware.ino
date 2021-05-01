@@ -60,12 +60,45 @@ PubSubClient client(myWiFiClient);
 Adafruit_MAX31855 thermocouple(THERMO_CLK, THERMO_CS, THERMO_DO);
 volatile int cutoffTemperature = 25;
 int cutoffTemperature_ADDR = 0;
+volatile int interuptCounter;
+int totalInterruptCounter;
+hw_timer_t * timer = NULL;
+portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
+
 
 // Message buffers to make sure data types play nice with each other
 #define BUFFER_SIZE 512
 char msg_buffer[BUFFER_SIZE];
 
+volatile int LED_blink_timer = 0;
+volatile int LED_blink_period = 200;
+volatile bool LED_blink_enable = false;
+
+// Interrupt Service Routine that should be called every ms
+void IRAM_ATTR onTimer() {
+  portENTER_CRITICAL_ISR(&timerMux);
+  if(LED_blink_enable){
+    if(LED_blink_timer > LED_blink_period){
+      // Toggle LED
+      LED_blink_timer = 0;
+      digitalWrite(LED_STATUS,!digitalRead(LED_STATUS));
+    }
+    else{
+      LED_blink_timer++;
+    }
+  }
+  portEXIT_CRITICAL_ISR(&timerMux);
+ 
+}
+
 void setup() {
+
+  // Setup Timers
+  timer =timerBegin(0, 80, true);
+  timerAttachInterrupt(timer, &onTimer, true);
+  timerAlarmWrite(timer, 1000, true);
+  timerAlarmEnable(timer);
+  
   // Title Card
   #ifdef ENABLE_DEBUG_OUTPUT
   String  TitleCard  = ("======================================================\n");
@@ -123,10 +156,10 @@ void setup() {
   Serial.println("** Starting WiFi Initialization **");
   Serial.println((String)"Connecting to "+ssid);
   #endif
-
+  
+  LED_blink_enable = true;
   WiFi.begin(ssid, password);
 
-  
   unsigned long start_time = millis();
   while(WiFi.status() != WL_CONNECTED) {
     unsigned long current_time = millis();
@@ -139,7 +172,9 @@ void setup() {
   }
   
   // We are now connected to the WiFi network
-  digitalWrite(LED_HEATER, HIGH);
+  LED_blink_enable = false;
+  digitalWrite(LED_STATUS, HIGH);
+  digitalWrite(LED_HEATER, LOW);
   #ifdef ENABLE_DEBUG_OUTPUT
   Serial.print("\n\n");
   Serial.println("Device connected successfully");
