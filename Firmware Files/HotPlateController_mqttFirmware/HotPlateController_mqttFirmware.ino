@@ -59,11 +59,12 @@ WiFiClient myWiFiClient;
 PubSubClient client(myWiFiClient);
 Adafruit_MAX31855 thermocouple(THERMO_CLK, THERMO_CS, THERMO_DO);
 volatile int cutoffTemperature = 25;
-int cutoffTemperature_ADDR = 0;
+int cutoffTemperature_ADDR = 10;
 volatile int interuptCounter;
 int totalInterruptCounter;
 hw_timer_t * timer = NULL;
 portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
+double hotPlateTemperature = 0;
 
 
 // Message buffers to make sure data types play nice with each other
@@ -86,6 +87,11 @@ void IRAM_ATTR onTimer() {
     else{
       LED_blink_timer++;
     }
+  }
+  if(hotPlateTemperature>cutoffTemperature){
+    // turn off the relay
+    digitalWrite(CONTROL_HEATER, LOW);
+    digitalWrite(LED_HEATER, LOW);
   }
   portEXIT_CRITICAL_ISR(&timerMux);
  
@@ -150,6 +156,11 @@ void setup() {
   // Setup Memory
   EEPROM.begin(EEPROM_SIZE);
   cutoffTemperature = EEPROM.read(cutoffTemperature_ADDR);
+  if(cutoffTemperature > 250 || cutoffTemperature < 25){
+    EEPROM.write(cutoffTemperature_ADDR, 25);
+    EEPROM.commit();
+  }
+  Serial.print("Read Cutoff Temp from memory:");Serial.println(cutoffTemperature);
   
   // Setup WiFi
   #ifdef ENABLE_DEBUG_OUTPUT
@@ -172,9 +183,7 @@ void setup() {
   }
   
   // We are now connected to the WiFi network
-  LED_blink_enable = false;
-  digitalWrite(LED_STATUS, HIGH);
-  digitalWrite(LED_HEATER, LOW);
+
   #ifdef ENABLE_DEBUG_OUTPUT
   Serial.print("\n\n");
   Serial.println("Device connected successfully");
@@ -184,21 +193,28 @@ void setup() {
   mqtt_refreshConnection();
   
   // We should now be connected to the MQTT Broker
-  #ifdef ENABLE_DEBUG_OUTPUT
   if(client.connected()){
-  Serial.println("");
-  Serial.println("MQTT connected successfully");
+    #ifdef ENABLE_DEBUG_OUTPUT
+    Serial.println("");
+    Serial.println("MQTT connected successfully");
+    LED_blink_enable = false;
+    digitalWrite(LED_STATUS, HIGH);
+    digitalWrite(LED_HEATER, LOW);
+    #endif
   }
   else {
+    #ifdef ENABLE_DEBUG_OUTPUT
     Serial.println("Failed to connect!");
+    #endif
   }
-  #endif
+  
   
 }
 
 void loop() {
   unsigned long current_time = millis();
   static unsigned long timer_1 = current_time;
+  static unsigned long timer_2 = current_time;
   #ifdef ENABLE_DEBUG_OUTPUT
   static bool run_once = true;
   if(run_once){
@@ -210,7 +226,12 @@ void loop() {
   if(!client.connected()){
     mqtt_refreshConnection();
   }
-   
+  if(current_time - timer_2 > 50){
+    timer_2 = current_time;
+    // Actions every 50 ms
+    hotPlateTemperature = thermocouple.readCelsius();
+  }
+  
   if(current_time - timer_1 > 1000){
     timer_1 = current_time;
     // Actions every 1 second
@@ -295,6 +316,11 @@ void mqtt_parse_message(char* topic, byte* message, unsigned int length) {
   if (String(topic) == "Lab/HotPlate/SetCufOff") {
     Serial.print("Changing output to ");
     cutoffTemperature = messageTemp.toInt();
-    Serial.println(messageTemp);
+    if(cutoffTemperature > 250 || cutoffTemperature < 25){
+      cutoffTemperature = 25;
+    }
+    EEPROM.write(cutoffTemperature_ADDR, cutoffTemperature);
+    EEPROM.commit();
+    Serial.println(cutoffTemperature);
   }
 }
