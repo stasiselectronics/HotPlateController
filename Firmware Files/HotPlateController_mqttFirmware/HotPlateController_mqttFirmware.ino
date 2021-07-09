@@ -27,9 +27,9 @@
 
 
 // Network Details - Change these to match your own network!
-const char* ssid = "####";
-const char* password =  "####";
-const char* mqtt_server = "####";
+String ssid = "####";
+String password =  "####";
+String mqtt_server = "####";
 
 const char* mqtt_clientID = "Hot Plate";
 const char* mqtt_Tag = "Lab/HotPlate/";
@@ -59,12 +59,18 @@ WiFiClient myWiFiClient;
 PubSubClient client(myWiFiClient);
 Adafruit_MAX31855 thermocouple(THERMO_CLK, THERMO_CS, THERMO_DO);
 volatile int cutoffTemperature = 25;
-int cutoffTemperature_ADDR = 10;
 volatile int interuptCounter;
 int totalInterruptCounter;
 hw_timer_t * timer = NULL;
 portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
 double hotPlateTemperature = 0;
+
+// Global Memory Locations
+#define CUTOFFTEMPERATURE_ADDR 10
+#define WIFI_SSID_ADDR 20
+#define WIFI_PASSWORD_ADDR 30 // not the most secure, but oh well
+#define MQTT_SERVER_ADDR 40 
+
 
 
 // Message buffers to make sure data types play nice with each other
@@ -74,6 +80,15 @@ char msg_buffer[BUFFER_SIZE];
 volatile int LED_blink_timer = 0;
 volatile int LED_blink_period = 200;
 volatile bool LED_blink_enable = false;
+
+void save_string(String myString; int address){
+  int string_length = strlen(myString) + 1;
+  for(int current_position = 0; current_position < string_length ; current_position++) {
+    EEPROM.write(address, myString[current_position]);
+    address++;
+  }
+  EEPROM.write( (address - 1) , null ); // add null terminator to the end  
+}
 
 // Interrupt Service Routine that should be called every ms
 void IRAM_ATTR onTimer() {
@@ -155,12 +170,26 @@ void setup() {
 
   // Setup Memory
   EEPROM.begin(EEPROM_SIZE);
-  cutoffTemperature = EEPROM.read(cutoffTemperature_ADDR);
+  cutoffTemperature = EEPROM.read(CUTOFFTEMPERATURE_ADDR);
   if(cutoffTemperature > 250 || cutoffTemperature < 25){
-    EEPROM.write(cutoffTemperature_ADDR, 25);
+    EEPROM.write(CUTOFFTEMPERATURE_ADDR, 25);
     EEPROM.commit();
   }
   Serial.print("Read Cutoff Temp from memory:");Serial.println(cutoffTemperature);
+
+  // Global Memory Locations
+//  #define CUTOFFTEMPERATURE_ADDR 10
+//  #define WIFI_SSID_ADDR 20
+//  #define WIFI_PASSWORD_ADDR 30 // not the most secure, but oh well
+//  #define MQTT_SERVER_ADDR 40 
+  // check if there are any saved passwords 
+  Serial.println("What network would you like to connect to?");
+  String ssid = Serial.readString();
+  Serial.println("And it's password?");
+  String password = Serial.readString();
+  Serial.println("Which MQTT server would you like to connect to?");
+  String mqtt_server = Serial.readString();
+
   
   // Setup WiFi
   #ifdef ENABLE_DEBUG_OUTPUT
@@ -319,7 +348,7 @@ void mqtt_parse_message(char* topic, byte* message, unsigned int length) {
     if(cutoffTemperature > 250 || cutoffTemperature < 25){
       cutoffTemperature = 25;
     }
-    EEPROM.write(cutoffTemperature_ADDR, cutoffTemperature);
+    EEPROM.write(, cutoffTemperature);
     EEPROM.commit();
     Serial.println(cutoffTemperature);
   }
