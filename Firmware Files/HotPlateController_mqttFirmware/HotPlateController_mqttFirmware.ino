@@ -27,9 +27,9 @@
 
 
 // Network Details - Change these to match your own network!
-const char* ssid = "comhem_56E137";
-const char* password =  "9zpht1au";
-const char* mqtt_server = "192.168.0.7";
+const char* ssid = "####";
+const char* password =  "####";
+const char* mqtt_server = "####";
 
 const char* mqtt_clientID = "Hot Plate";
 const char* mqtt_Tag = "Lab/HotPlate/";
