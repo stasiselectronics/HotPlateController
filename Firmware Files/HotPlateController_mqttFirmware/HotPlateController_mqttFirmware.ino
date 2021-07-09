@@ -81,13 +81,13 @@ volatile int LED_blink_timer = 0;
 volatile int LED_blink_period = 200;
 volatile bool LED_blink_enable = false;
 
-void save_string(String myString; int address){
-  int string_length = strlen(myString) + 1;
+void save_string(String myString, int address){
+  int string_length = myString.length() + 1;
   for(int current_position = 0; current_position < string_length ; current_position++) {
     EEPROM.write(address, myString[current_position]);
     address++;
   }
-  EEPROM.write( (address - 1) , null ); // add null terminator to the end  
+  EEPROM.write( (address - 1) , '/0' ); // add null terminator to the end  
 }
 
 // Interrupt Service Routine that should be called every ms
