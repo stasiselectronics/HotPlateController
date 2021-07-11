@@ -7,7 +7,8 @@ void setup_sensors(){
   }
   else{
     Serial.println("Thermocouple initalized");
-    Serial.print("Current Temperature: ");Serial.println(thermocouple.readCelsius());Serial.print(" /u00B0C");
+    Serial.print("Current Temperature: ");Serial.print(thermocouple.readCelsius());
+    Serial.println(" deg C");
   }
   Serial.println("Checking current sensor");
   Serial.print("Raw ADC: ");Serial.println(analogRead(CURRENT_SENSOR));

@@ -103,7 +103,7 @@ void setup() {
 
   LED_blink_enable = true;
   WiFiProvision();
-  LED_blink_enable = false;
+  
 
   
   // We are now connected to the WiFi network
@@ -120,6 +120,9 @@ void setup() {
   }
   else {
     Serial.println("Failed to connect!");
+    Serial.println("Restarting");
+    delay(2000);
+    ESP.restart();
   }
   
   
@@ -164,11 +167,10 @@ void loop() {
     myCutoff.toCharArray(msg_buffer, BUFFER_SIZE);
     client.publish("Lab/HotPlate/CutOff", msg_buffer);
     
-    Serial.println("** Values Sent **");
-    Serial.print("RSSI: ");Serial.println(myRSSI);
-    Serial.print("Temperature: ");Serial.println(myTemp);
-    Serial.print("Heater status: ");Serial.println(myStatus);
-    Serial.print("Cut Off Temp: ");Serial.println(myCutoff);
+    Serial.print(myRSSI);Serial.print(",");
+    Serial.print(myTemp);Serial.print(",");
+    Serial.print(myStatus);Serial.print(",");
+    Serial.println(myCutoff);
     
   }
   client.loop(); //process any new messages and trigger any callbacks

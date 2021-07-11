@@ -23,13 +23,15 @@
 // Global Objects
 extern char mySSID[BUFFSIZE];
 extern char myPassword[BUFFSIZE];
+extern char myMQTTServer[BUFFSIZE];
 
 unsigned int readNetworkInfo(){
   unsigned int checksum = 0;
   for(int i = 0; i < 64; i++){
     mySSID[i]=(char)EEPROM.read(i);
     myPassword[i]=(char)EEPROM.read(i+64);
-    checksum+=(byte)mySSID[i] + (byte)myPassword[i];
+    myMQTTServer[i]=(char)EEPROM.read(i+128);
+    checksum+=(byte)mySSID[i] + (byte)myPassword[i] + (byte)myMQTTServer[i];
   }
   return checksum;
 }
@@ -39,7 +41,8 @@ unsigned int saveNetworkInfo(){
   for(int i = 0; i < 64; i++){
     EEPROM.write(i, mySSID[i]);
     EEPROM.write(i+64, myPassword[i]);
-    checksum+=(byte)mySSID[i] + (byte)myPassword[i];
+    EEPROM.write(i+128, myMQTTServer[i]);
+    checksum+=(byte)mySSID[i] + (byte)myPassword[i] + (byte)myMQTTServer[i];
   }
   EEPROM.commit();
   return checksum;
@@ -48,13 +51,14 @@ unsigned int saveNetworkInfo(){
 void WiFiProvision() {
   // Setup Memory
   EEPROM.begin(EEPROM_SIZE);
-
+  String response = "";
   Serial.println("Checking for existing network credentials");
   if(readNetworkInfo()){
     // there are existing crednetials, lets try those 
     Serial.println("Credentials found:");
     Serial.println(mySSID);
-    Serial.println(myPassword); 
+    Serial.println(myPassword);
+    Serial.print("MQTT Server: ");Serial.println(myMQTTServer);
     Serial.print("Checksum:  ");Serial.println(readNetworkInfo());
     Serial.println("Let's try connecting to that one");
   }
@@ -81,7 +85,7 @@ void WiFiProvision() {
       // ask which one to connect to
       Serial.println("What's the SSID you want to connect to? Enter its number and press enter");
       Serial.println("If nothing happens, make sure you are appending a line feed to your input");
-      String response = readstring(RESPONSE_TIMEOUT);
+      response = readstring(RESPONSE_TIMEOUT);
       if(response == "Timeout"){
         Serial.println("Input timeout, restart to try again");
         while(true){
@@ -93,6 +97,10 @@ void WiFiProvision() {
       Serial.println("What's the password?");
       response = readstring(RESPONSE_TIMEOUT);
       response.toCharArray(myPassword, BUFFSIZE);
+
+      Serial.println("What is the MQTT Server's ip address?");
+      response = readstring(RESPONSE_TIMEOUT);
+      response.toCharArray(myMQTTServer, BUFFSIZE);
     }
   }
   // Either we loaded credentials or we asked for new ones
@@ -109,7 +117,8 @@ void WiFiProvision() {
   }
   Serial.println("\n\nDevice connected successfully!");
   Serial.print("IPv4 Address:  ");Serial.println(WiFi.localIP());
-  
+
   Serial.println("Saving credentials");
   Serial.print("Checksum:  ");Serial.println(saveNetworkInfo());
+  
 }

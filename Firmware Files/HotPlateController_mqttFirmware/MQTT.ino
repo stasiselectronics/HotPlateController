@@ -11,18 +11,21 @@ void mqtt_refreshConnection(){
   client.setCallback(mqtt_parse_message);
   client.subscribe("Lab/HotPlate/#");
   
-  long start_time = millis();
+  unsigned int start_time = millis();
+  unsigned int start_time2 = millis();
   bool done_flag = false;
   while(!client.connected() && !done_flag) {
-    unsigned long current_time = millis();
-    if(current_time-start_time>=150)
+    unsigned int current_time = millis();
+    if(current_time-start_time2>500)
     {
-      Serial.print(".");
-      start_time=current_time;
-      if(current_time-start_time>=10000){
-        done_flag = true;
-        break;
-      }
+      Serial.print("\u2592"); // Print a block ▒
+      start_time2=current_time;
+    }
+    if(current_time-start_time>(20*1000)){
+      Serial.println("\nCould not connect to the MQTT Server");
+      Serial.println("Restarting");
+      delay(2000);
+      ESP.restart();
     }
   }
 }
