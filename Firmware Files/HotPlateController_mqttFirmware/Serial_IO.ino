@@ -1,3 +1,4 @@
+
 String readstring(unsigned int timeout){
   char message_buffer[BUFFSIZE] = "Uninitialized";
   memset(message_buffer, '\0', BUFFSIZE);

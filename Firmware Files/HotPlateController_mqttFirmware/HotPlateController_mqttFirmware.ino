@@ -8,13 +8,6 @@
 //      Chandler McCowan, April 11 2021
 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-// Serial Comm Definitions
-#define BAUD_RATE 115200
-#define ENABLE_DEBUG_OUTPUT //comment out to disable debug output
-
-// Copy and paste this around debug output to add enable/disable control
-
-
 // Libraries
 #include <WiFi.h>
 #include <SPI.h>
@@ -22,15 +15,15 @@
 #include "Adafruit_MAX31855.h"
 #include <EEPROM.h>
 
-
-// Network Details - Change these to match your own network!
-String ssid = "####";
-String password =  "####";
-String mqtt_server = "####";
+// Settings
+#define EEPROM_SIZE 512 // total memory in bytes we can save and read
+#define BAUD_RATE 115200 // for serial communication
+#define BUFFSIZE 64 // size of a common char array buffer size
+#define TOTAL_MEMORY 512
+#define RESPONSE_TIMEOUT 60000 // one minute in ms
 
 const char* mqtt_clientID = "Hot Plate";
 const char* mqtt_Tag = "Lab/HotPlate/";
-
 
 // Pin Mapping - These are specific to the board design, change at your own risk!
 #define LED_STATUS 12         // Green LED, active high
@@ -45,6 +38,11 @@ const char* mqtt_Tag = "Lab/HotPlate/";
 // Memory Settings
 #define EEPROM_SIZE 256
 
+// Network Details
+char mySSID[BUFFSIZE];
+char myPassword[BUFFSIZE];
+char myMQTTServer[BUFFSIZE];
+
 // Function Calls
 // Place here to help the compiler know where to look for extra functions
 void mqtt_refreshConnection();
@@ -56,69 +54,28 @@ WiFiClient myWiFiClient;
 PubSubClient client(myWiFiClient);
 Adafruit_MAX31855 thermocouple(THERMO_CLK, THERMO_CS, THERMO_DO);
 volatile int cutoffTemperature = 25;
-volatile int interuptCounter;
-int totalInterruptCounter;
-hw_timer_t * timer = NULL;
-portMUX_TYPE timerMux = portMUX_INITIALIZER_UNLOCKED;
+
+
 double hotPlateTemperature = 0;
+extern volatile bool LED_blink_enable;
 
 // Global Memory Locations
-#define CUTOFFTEMPERATURE_ADDR 10
-#define WIFI_SSID_ADDR 20
-#define WIFI_PASSWORD_ADDR 30 // not the most secure, but oh well
-#define MQTT_SERVER_ADDR 40 
-
-
+#define WIFI_SSID_ADDR 0
+#define WIFI_PASSWORD_ADDR 64 // not the most secure, but oh well
+#define MQTT_SERVER_ADDR 128
+#define CUTOFFTEMPERATURE_ADDR 192
 
 // Message buffers to make sure data types play nice with each other
 #define BUFFER_SIZE 512
 char msg_buffer[BUFFER_SIZE];
 
-volatile int LED_blink_timer = 0;
-volatile int LED_blink_period = 200;
-volatile bool LED_blink_enable = false;
 
-void save_string(String myString, int address){
-  int string_length = myString.length() + 1;
-  for(int current_position = 0; current_position < string_length ; current_position++) {
-    EEPROM.write(address, myString[current_position]);
-    address++;
-  }
-  EEPROM.write( (address - 1) , '/0' ); // add null terminator to the end  
-}
-
-// Interrupt Service Routine that should be called every ms
-void IRAM_ATTR onTimer() {
-  portENTER_CRITICAL_ISR(&timerMux);
-  if(LED_blink_enable){
-    if(LED_blink_timer > LED_blink_period){
-      // Toggle LED
-      LED_blink_timer = 0;
-      digitalWrite(LED_STATUS,!digitalRead(LED_STATUS));
-    }
-    else{
-      LED_blink_timer++;
-    }
-  }
-  if(hotPlateTemperature>cutoffTemperature){
-    // turn off the relay
-    digitalWrite(CONTROL_HEATER, LOW);
-    digitalWrite(LED_HEATER, LOW);
-  }
-  portEXIT_CRITICAL_ISR(&timerMux);
- 
-}
 
 void setup() {
-
-  // Setup Timers
-  timer =timerBegin(0, 80, true);
-  timerAttachInterrupt(timer, &onTimer, true);
-  timerAlarmWrite(timer, 1000, true);
-  timerAlarmEnable(timer);
   
-  // Title Card
-
+  setup_timers();
+    
+                       // Title Card
   String  TitleCard  = ("======================================================\n");
           TitleCard += ("===  Hotplate Controller MQTT Firmware  ==============\n");
           TitleCard += ("===  Start of Sketch                    ==============\n");
@@ -130,23 +87,10 @@ void setup() {
   Serial.println(" . . . . . . . . . . . . .\nBeginning Initialization");
 
   // Setup Pins
-  Serial.println("** Setting up Pins **");
-  Serial.println("Status LED: Pin 14, GPIO 12");
-  pinMode(LED_STATUS,     OUTPUT);
-  Serial.println("Heater LED: Pin 16, GPIO 13");
-  pinMode(LED_HEATER,     OUTPUT);
-  Serial.println("Heater Control: Pin 24, GPIO 2");
-  pinMode(CONTROL_HEATER,     OUTPUT);
-  Serial.println("Current Sensor: Pin 7, GPIO 34");
-  pinMode(CURRENT_SENSOR,     OUTPUT);
-  Serial.println("5V/2 Supply Sense: Pin 6, GPIO 34");
-  Serial.println("");
-  pinMode(FIVE_VOLT_RAIL,     OUTPUT);
+  setup_pins();
 
-  // Setup thermocouple
-  if (!thermocouple.begin()) {
-    Serial.println("Failed to initialize thermocouple");
-  }
+  // Setup Sensors
+  setup_sensors();
 
   // Setup Memory
   EEPROM.begin(EEPROM_SIZE);
@@ -159,32 +103,23 @@ void setup() {
 
   LED_blink_enable = true;
   WiFiProvision();
+  LED_blink_enable = false;
 
   
   // We are now connected to the WiFi network
-
-  #ifdef ENABLE_DEBUG_OUTPUT
-  Serial.print("\n\n");
-  Serial.println("Device connected successfully");
-  Serial.print("IPv4 Address:  ");Serial.println(WiFi.localIP());
-  #endif
 
   mqtt_refreshConnection();
   
   // We should now be connected to the MQTT Broker
   if(client.connected()){
-    #ifdef ENABLE_DEBUG_OUTPUT
     Serial.println("");
     Serial.println("MQTT connected successfully");
     LED_blink_enable = false;
     digitalWrite(LED_STATUS, HIGH);
     digitalWrite(LED_HEATER, LOW);
-    #endif
   }
   else {
-    #ifdef ENABLE_DEBUG_OUTPUT
     Serial.println("Failed to connect!");
-    #endif
   }
   
   
@@ -194,13 +129,11 @@ void loop() {
   unsigned long current_time = millis();
   static unsigned long timer_1 = current_time;
   static unsigned long timer_2 = current_time;
-  #ifdef ENABLE_DEBUG_OUTPUT
   static bool run_once = true;
   if(run_once){
     Serial.println((String)"\n . . . . . . . . . . . . .\n"+"Entered Loop");
     run_once = false;
   }
-  #endif
   
   if(!client.connected()){
     mqtt_refreshConnection();
@@ -231,75 +164,13 @@ void loop() {
     myCutoff.toCharArray(msg_buffer, BUFFER_SIZE);
     client.publish("Lab/HotPlate/CutOff", msg_buffer);
     
-    #ifdef DISABLE_DEBUG_OUTPUT
     Serial.println("** Values Sent **");
     Serial.print("RSSI: ");Serial.println(myRSSI);
     Serial.print("Temperature: ");Serial.println(myTemp);
     Serial.print("Heater status: ");Serial.println(myStatus);
     Serial.print("Cut Off Temp: ");Serial.println(myCutoff);
-    #endif
     
   }
   client.loop(); //process any new messages and trigger any callbacks
   yield(); // To keep the board running and feed watchdogs
-}
-
-void mqtt_refreshConnection(){
-  // Connect to MQTT Server
-  #ifdef ENABLE_DEBUG_OUTPUT
-  Serial.println("** Initializing MQTT **");
-  Serial.println((String)"Connecting to "+mqtt_server);
-  #endif
-
-  client.setServer(mqtt_server, 1883);
-  client.connect(mqtt_clientID);
-  client.setCallback(mqtt_parse_message);
-  client.subscribe("Lab/HotPlate/#");
-  
-  long start_time = millis();
-  bool done_flag = false;
-  while(!client.connected() && !done_flag) {
-    unsigned long current_time = millis();
-    if(current_time-start_time>=150)
-    {
-      #ifdef ENABLE_DEBUG_OUTPUT
-      Serial.print(".");
-      #endif
-      start_time=current_time;
-      if(current_time-start_time>=10000){
-        done_flag = true;
-        break;
-      }
-    }
-  }
-}
-
-void mqtt_parse_message(char* topic, byte* message, unsigned int length) {
-  String messageTemp;
-  for (int i = 0; i < length; i++) {
-    messageTemp += (char)message[i];
-  }
-  if (String(topic) == "Lab/HotPlate/SetStatus") {
-    Serial.print("Changing output to ");
-    if(messageTemp == "true"){
-      Serial.println("on");
-      digitalWrite(CONTROL_HEATER, HIGH);
-      digitalWrite(LED_HEATER, HIGH);
-    }
-    else if(messageTemp == "false"){
-      Serial.println("off");
-      digitalWrite(CONTROL_HEATER, LOW);
-      digitalWrite(LED_HEATER, LOW);
-    }
-  }
-  if (String(topic) == "Lab/HotPlate/SetCufOff") {
-    Serial.print("Changing output to ");
-    cutoffTemperature = messageTemp.toInt();
-    if(cutoffTemperature > 250 || cutoffTemperature < 25){
-      cutoffTemperature = 25;
-    }
-    EEPROM.write(, cutoffTemperature);
-    EEPROM.commit();
-    Serial.println(cutoffTemperature);
-  }
 }
