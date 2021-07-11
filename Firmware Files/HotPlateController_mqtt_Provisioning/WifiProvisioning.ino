@@ -21,7 +21,6 @@
 #define RESPONSE_TIMEOUT 60000 // one minute in ms
 
 // Global Objects
-extern char msg_buffer[TOTAL_MEMORY];
 extern char mySSID[BUFFSIZE];
 extern char myPassword[BUFFSIZE];
 

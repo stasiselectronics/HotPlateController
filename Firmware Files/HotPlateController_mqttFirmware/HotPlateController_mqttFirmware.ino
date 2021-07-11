@@ -14,9 +14,6 @@
 
 // Copy and paste this around debug output to add enable/disable control
 
-#ifdef ENABLE_DEBUG_OUTPUT
-// Debug Output Code 
-#endif
 
 // Libraries
 #include <WiFi.h>
@@ -121,7 +118,7 @@ void setup() {
   timerAlarmEnable(timer);
   
   // Title Card
-  #ifdef ENABLE_DEBUG_OUTPUT
+
   String  TitleCard  = ("======================================================\n");
           TitleCard += ("===  Hotplate Controller MQTT Firmware  ==============\n");
           TitleCard += ("===  Start of Sketch                    ==============\n");
@@ -131,41 +128,24 @@ void setup() {
   Serial.begin(BAUD_RATE);
   Serial.print(TitleCard);
   Serial.println(" . . . . . . . . . . . . .\nBeginning Initialization");
-  #endif
 
   // Setup Pins
-  #ifdef ENABLE_DEBUG_OUTPUT
   Serial.println("** Setting up Pins **");
   Serial.println("Status LED: Pin 14, GPIO 12");
-  #endif
   pinMode(LED_STATUS,     OUTPUT);
-  
-  #ifdef ENABLE_DEBUG_OUTPUT
   Serial.println("Heater LED: Pin 16, GPIO 13");
-  #endif
   pinMode(LED_HEATER,     OUTPUT);
-  
-  #ifdef ENABLE_DEBUG_OUTPUT
   Serial.println("Heater Control: Pin 24, GPIO 2");
-  #endif
   pinMode(CONTROL_HEATER,     OUTPUT);
-  
-  #ifdef ENABLE_DEBUG_OUTPUT
   Serial.println("Current Sensor: Pin 7, GPIO 34");
-  #endif
   pinMode(CURRENT_SENSOR,     OUTPUT);
-
-  #ifdef ENABLE_DEBUG_OUTPUT
   Serial.println("5V/2 Supply Sense: Pin 6, GPIO 34");
   Serial.println("");
-  #endif
   pinMode(FIVE_VOLT_RAIL,     OUTPUT);
 
   // Setup thermocouple
   if (!thermocouple.begin()) {
-    #ifdef ENABLE_DEBUG_OUTPUT
     Serial.println("Failed to initialize thermocouple");
-    #endif
   }
 
   // Setup Memory
@@ -177,39 +157,9 @@ void setup() {
   }
   Serial.print("Read Cutoff Temp from memory:");Serial.println(cutoffTemperature);
 
-  // Global Memory Locations
-//  #define CUTOFFTEMPERATURE_ADDR 10
-//  #define WIFI_SSID_ADDR 20
-//  #define WIFI_PASSWORD_ADDR 30 // not the most secure, but oh well
-//  #define MQTT_SERVER_ADDR 40 
-  // check if there are any saved passwords 
-  Serial.println("What network would you like to connect to?");
-  String ssid = Serial.readString();
-  Serial.println("And it's password?");
-  String password = Serial.readString();
-  Serial.println("Which MQTT server would you like to connect to?");
-  String mqtt_server = Serial.readString();
-
-  
-  // Setup WiFi
-  #ifdef ENABLE_DEBUG_OUTPUT
-  Serial.println("** Starting WiFi Initialization **");
-  Serial.println((String)"Connecting to "+ssid);
-  #endif
-  
   LED_blink_enable = true;
-  WiFi.begin(ssid, password);
+  WiFiProvision();
 
-  unsigned long start_time = millis();
-  while(WiFi.status() != WL_CONNECTED) {
-    unsigned long current_time = millis();
-    if(current_time-start_time>=1000) {
-      #ifdef ENABLE_DEBUG_OUTPUT
-      Serial.print(".");
-      start_time=current_time;
-      #endif
-    }
-  }
   
   // We are now connected to the WiFi network
 
