@@ -1,4 +1,4 @@
-update=08/13/21 09:23:30
+update=08/13/21 09:28:04
 version=1
 last_client=kicad
 [general]
@@ -245,7 +245,7 @@ dPairGap=0.25
 dPairViaGap=0.25
 [schematic_editor]
 version=1
-PageLayoutDescrFile=
+PageLayoutDescrFile=Libraries/Templates/stasis_a3.kicad_wks
 PlotDirectoryName=Schematics/
 SubpartIdSeparator=0
 SubpartFirstId=65
