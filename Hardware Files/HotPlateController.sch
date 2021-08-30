@@ -4,11 +4,11 @@ EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
 Sheet 1 1
-Title ""
-Date ""
-Rev ""
+Title "WiFi Hotplate Controller"
+Date "2021-08-13"
+Rev "A02"
 Comp ""
-Comment1 ""
+Comment1 "https://github.com/stasiselectronics/HotPlateController"
 Comment2 ""
 Comment3 ""
 Comment4 ""

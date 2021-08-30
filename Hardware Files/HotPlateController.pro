@@ -1,4 +1,4 @@
-update=01/11/21 22:47:22
+update=08/13/21 09:28:04
 version=1
 last_client=kicad
 [general]
@@ -243,3 +243,13 @@ uViaDrill=0.1
 dPairWidth=0.2
 dPairGap=0.25
 dPairViaGap=0.25
+[schematic_editor]
+version=1
+PageLayoutDescrFile=Libraries/Templates/stasis_a3.kicad_wks
+PlotDirectoryName=Schematics/
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceAjustPassiveValues=0
+LabSize=50
+ERC_TestSimilarLabels=1
