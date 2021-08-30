@@ -21,4 +21,6 @@ void setup_pins(){
   pinMode(CURRENT_SENSOR,     OUTPUT);
   Serial.println("5V/2 Supply Sense: Pin 6, GPIO 34");
   pinMode(FIVE_VOLT_RAIL,     INPUT);
+  //ledcSetup(2,5000,8);
+  //ledcAttachPin(CONTROL_HEATER, 2);
 }
